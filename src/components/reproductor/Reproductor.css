@@ -1,0 +1,65 @@
+.reproductor {
+  background-color: #4a4a4a;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reproductor-info h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.reproductor-info p {
+  color: #cccccc;
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+}
+
+.reproductor-controles {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reproductor-play {
+  background-color: #e07a3a;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.reproductor-barra {
+  flex: 1;
+  height: 6px;
+  background-color: #6a6a6a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.reproductor-barra-progreso {
+  height: 100%;
+  background-color: #e07a3a;
+}
+
+.reproductor-track {
+  text-align: right;
+}
+
+.reproductor-nombre,
+.reproductor-artista {
+  color: #ffffff;
+  margin: 0;
+  font-weight: 600;
+}
+
+.reproductor-categoria {
+  color: #e07a3a;
+  margin: 4px 0 0;
+}
