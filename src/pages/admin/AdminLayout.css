@@ -1,0 +1,146 @@
+.admin-layout {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: #d9d9d9;
+  color: #222;
+  text-align: left;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+/* ---- Header ---- */
+.admin-header {
+  flex-shrink: 0;
+  background: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+}
+
+.admin-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+}
+
+.admin-salir {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #e8621a;
+  border-radius: 0;
+  color: #fff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0 0 0.2rem;
+  cursor: pointer;
+}
+
+/* ---- Cuerpo: menú + contenido ---- */
+.admin-cuerpo {
+  flex: 1 0 auto;
+  display: flex;
+}
+
+.admin-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #a3a3a3;
+  padding: 1rem;
+}
+
+.admin-sidebar-titulo {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #6b6b6b;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-link {
+  display: block;
+  padding: 0.55rem 0.5rem;
+  text-align: center;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.admin-link.activo {
+  background: #0b4a86;
+}
+
+.admin-contenido {
+  flex: 1;
+  min-width: 0;
+  padding: 1.25rem 1.5rem;
+}
+
+/* ---- Pie de página ---- */
+.admin-pie {
+  flex-shrink: 0;
+  background: #3a3a3a;
+  color: #fff;
+  padding: 1.5rem 2rem 1rem;
+  font-size: 0.8rem;
+}
+
+.admin-pie-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.admin-pie h4 {
+  margin: 0 0 0.6rem;
+  font-size: 0.8rem;
+}
+
+.admin-pie p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.admin-pie a {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #fff;
+}
+
+.pie-naranja { color: #e8621a; }
+.pie-amarillo { color: #f5d000; }
+.pie-rojo { color: #e03a2b; }
+
+.admin-pie .admin-pie-legal {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #7a7a7a;
+  font-size: 0.7rem;
+}
+
+/* ---- Celular: el menú pasa arriba ---- */
+@media (max-width: 700px) {
+  .admin-cuerpo {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    width: auto;
+  }
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .admin-pie-grid {
+    grid-template-columns: 1fr;
+  }
+}

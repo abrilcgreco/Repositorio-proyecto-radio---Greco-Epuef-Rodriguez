@@ -1,0 +1,135 @@
+.login-pantalla {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #14121c 0%, #241d3d 100%);
+}
+
+.login-caja {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  background: #1e1b2b;
+  border: 1px solid #322c47;
+  border-radius: 14px;
+  padding: 2rem;
+  color: #ececf1;
+}
+
+.login-titulo {
+  margin: 0 0 0.25rem;
+  font-size: 1.4rem;
+  color: #f1eefc;
+}
+
+.login-subtitulo {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  color: #a09cb5;
+}
+
+.login-campo {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.login-campo label {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #c9c5db;
+}
+
+.login-campo input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #3b3455;
+  background: #16141f;
+  color: #ececf1;
+  font-size: 0.95rem;
+}
+
+.login-campo input:focus {
+  outline: none;
+  border-color: #7c5cff;
+}
+
+.login-campo input.con-error {
+  border-color: #e0576b;
+}
+
+.login-password {
+  position: relative;
+  display: flex;
+}
+
+.login-ver {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #a09cb5;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.login-error {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #e0576b;
+}
+
+.login-alerta {
+  background: rgba(224, 87, 107, 0.12);
+  border: 1px solid #e0576b;
+  color: #ffb3bf;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.login-boton {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: #7c5cff;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-boton:hover {
+  background: #6b4ae8;
+}
+
+.login-ayuda {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #322c47;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.78rem;
+  color: #8f8ba5;
+}
+
+@media (max-width: 480px) {
+  .login-caja {
+    padding: 1.5rem;
+  }
+  .login-titulo {
+    font-size: 1.2rem;
+  }
+}
