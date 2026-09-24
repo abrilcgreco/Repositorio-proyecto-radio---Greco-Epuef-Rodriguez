@@ -1,26 +1,60 @@
-import { useEffect } from 'react';
-import Footer from '../components/layout/Footer';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import Reproductor from '../components/reproductor/Reproductor';
-import { useReproductor } from '../context/ReproductorContext';
+import './Home.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+interface Categoria {
+  id: number;
+  nombre: string;
+  imagenBg?: string;
+}
+
+const categoriasData: Categoria[] = [
+  { id: 1, nombre: 'Género 1' },
+  { id: 2, nombre: 'Género 2' },
+  { id: 3, nombre: 'Género 3' },
+  { id: 4, nombre: 'Género 4' },
+  { id: 5, nombre: 'Género 5' },
+  { id: 6, nombre: 'Género 6' },
+];
 
 export default function Home() {
-  const { setTrack } = useReproductor();
-
-  useEffect(() => {
-    setTrack({
-      nombre: 'Canción de prueba',
-      artista: 'Artista de prueba',
-      categoria: 'Música',
-      url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
-    });
-  }, []); // Se ejecuta solo una vez cuando el componente se carga
-
   return (
-    <div>
-      <h1>Bienvenido a la página de inicio</h1>
-      <p>Esta es la página principal de la aplicación.</p>
-      <Reproductor />
-      <Footer />
-    </div>
+    <main className="home-container">
+      <section className="hero-section">
+        <div className="mascota-container">
+          <img
+            src="/robotGif.gif"
+            alt="Robot animado Radio 724"
+            className="mascota-img"
+          />
+        </div>
+        <div className="reproductor-wrapper">
+          <Reproductor />
+        </div>
+      </section>
+
+      <section className="categorias-section">
+        <h2 className="categorias-title">Categorías</h2>
+
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={24}
+          slidesPerView={3}
+          className="categorias-swiper"
+        >
+          {categoriasData.map((cat) => (
+            <SwiperSlide key={cat.id}>
+              <div className="categoria-card">
+                <button className="genero-btn">{cat.nombre}</button>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+    </main>
   );
 }

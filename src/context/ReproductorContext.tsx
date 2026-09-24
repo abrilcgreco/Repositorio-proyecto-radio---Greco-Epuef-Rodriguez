@@ -1,4 +1,5 @@
 import { useState, createContext, useRef, useContext, useEffect, type ReactNode } from 'react';
+import { playlist, type TrackConDuracion } from '../data/playlist';
 
 interface Track {
   nombre: string;
@@ -15,6 +16,7 @@ interface ReproductorContextType {
   isPlaying: boolean;
   currentTrack: Track | null;
   progress: number;
+  duration: number;
   setProgress: (value: number) => void;
   volume: number;
   setVolume: (value: number) => void;
@@ -27,16 +29,44 @@ interface ReproductorContextType {
 
 export const ReproductorContext = createContext<ReproductorContextType | null>(null);
 
+const RADIO_START = new Date('2026-01-01T00:00:00').getTime();
+
+function calcularEstadoActual(lista: TrackConDuracion[]) {
+  const duracionTotal = lista.reduce((acc, t) => acc + t.duracionSegundos, 0);
+  const segundosTranscurridos = Math.floor((Date.now() - RADIO_START) / 1000) % duracionTotal;
+
+  let acumulado = 0;
+  for (const track of lista) {
+    if (segundosTranscurridos < acumulado + track.duracionSegundos) {
+      return { track, segundoEnCancion: segundosTranscurridos - acumulado };
+    }
+    acumulado += track.duracionSegundos;
+  }
+
+  return { track: lista[0], segundoEnCancion: 0 };
+}
+
 export function ReproductorProvider({ children }: ReproductorProviderProps) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [progress, setProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
   const [volume, setVolume] = useState<number>(1);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const play = () => {
-    audioRef.current?.play();
+    const { track, segundoEnCancion } = calcularEstadoActual(playlist);
+
+    if (audioRef.current) {
+      if (currentTrack?.url !== track.url) {
+        audioRef.current.src = track.url;
+      }
+      audioRef.current.currentTime = segundoEnCancion;
+      audioRef.current.play();
+    }
+
+    setCurrentTrack(track);
     setIsPlaying(true);
   };
 
@@ -62,25 +92,27 @@ export function ReproductorProvider({ children }: ReproductorProviderProps) {
     }
   };
 
-useEffect(() => {
-  const audio = audioRef.current;
-  if (!audio) return;
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
 
-  const actualizarProgreso = () => {
-    if (audio.duration) {
-      const porcentaje = (audio.currentTime / audio.duration) * 100;
-      setProgress(porcentaje);
-    }
-  };
+    const actualizarProgreso = () => setProgress(audio.currentTime);
+    const actualizarDuracion = () => setDuration(audio.duration);
 
-  audio.addEventListener('timeupdate', actualizarProgreso);
-  return () => audio.removeEventListener('timeupdate', actualizarProgreso);
-}, []);
+    audio.addEventListener('timeupdate', actualizarProgreso);
+    audio.addEventListener('loadedmetadata', actualizarDuracion);
+
+    return () => {
+      audio.removeEventListener('timeupdate', actualizarProgreso);
+      audio.removeEventListener('loadedmetadata', actualizarDuracion);
+    };
+  }, []);
 
   const value = {
     isPlaying,
     currentTrack,
     progress,
+    duration,
     setProgress,
     volume,
     setVolume,
