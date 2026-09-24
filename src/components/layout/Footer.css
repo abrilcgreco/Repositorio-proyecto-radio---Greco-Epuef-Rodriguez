@@ -24,3 +24,14 @@
   .site-footer { grid-template-columns: 1fr; text-align: center; padding: 20px; }
   .footer-col p { text-align: center; }
 }
+.footer-admin-link {
+  color: #888;
+  font-size: 0.75rem;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.footer-admin-link:hover {
+  opacity: 1;
+}

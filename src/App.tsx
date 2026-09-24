@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import Categorias from "./components/Categorias";
 import Novedades from "./components/Novedades";
 
+
 export default function App() {
   return (
     <AuthProvider>

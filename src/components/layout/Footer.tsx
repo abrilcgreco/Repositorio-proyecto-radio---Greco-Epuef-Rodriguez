@@ -24,6 +24,11 @@ export default function Footer() {
         <Link to="/programas">Programas</Link>
         <Link to="/noticias">Noticias</Link>
       </div>
+      <Link to="/login" className="footer-admin-link" aria-label="Acceso administrador">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm3 8H9V7a3 3 0 016 0v3z" />
+      </svg>
+</Link>
     </footer>
   );
 }
