@@ -1,3 +1,4 @@
+
 export default function Novedades() {
   return (
     <div>
