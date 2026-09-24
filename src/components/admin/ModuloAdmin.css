@@ -1,0 +1,147 @@
+.modulo {
+  text-align: left;
+}
+
+.modulo-titulo {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #222;
+}
+
+.modulo-subtitulo {
+  margin: 1.75rem 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #222;
+}
+
+/* ---- Tabla ---- */
+.modulo-tabla-wrap {
+  overflow-x: auto;
+}
+
+.modulo-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.modulo-tabla th {
+  background: #0b4a86;
+  color: #fff;
+  padding: 0.45rem 0.6rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.modulo-tabla td {
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+  font-weight: 600;
+  color: #222;
+}
+
+.modulo-vacio {
+  font-weight: 400;
+  color: #666;
+}
+
+.modulo-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #222;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modulo-link:hover {
+  color: #0b4a86;
+  text-decoration: underline;
+}
+
+/* ---- Formulario ---- */
+.modulo-caja {
+  border: 1px solid #333;
+  padding: 0.9rem 1rem;
+}
+
+.modulo-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.modulo-campo {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+}
+
+.modulo-campo label {
+  margin-bottom: 0.25rem;
+  color: #222;
+}
+
+.modulo-campo input,
+.modulo-campo textarea,
+.modulo-campo select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #333;
+  background: #d9d9d9;
+  color: #222;
+  font: inherit;
+}
+
+.modulo-drop {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #333;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.modulo-error {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: #b3261e;
+}
+
+.modulo-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.modulo-guardar,
+.modulo-cancelar {
+  padding: 0.55rem 1rem;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modulo-guardar {
+  background: #222;
+  color: #fff;
+}
+
+.modulo-cancelar {
+  background: #a3a3a3;
+  color: #222;
+}
+
+@media (max-width: 700px) {
+  .modulo-campos {
+    grid-template-columns: 1fr;
+  }
+}
