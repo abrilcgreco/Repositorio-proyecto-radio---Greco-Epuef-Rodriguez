@@ -36,22 +36,26 @@ export default function Home() {
       </section>
 
       <section className="categorias-section">
-        <h2 className="categorias-title">Categorías</h2>
+        <h2 className="categorias-title">¡Géneros que tenemos para vos!</h2>
 
         <Swiper
-            modules={[Navigation]}
-            navigation
-            spaceBetween={24}
-            slidesPerView={3}
-            className="categorias-swiper"
-          >
+          modules={[Navigation]}
+          navigation
+          spaceBetween={20}
+          slidesPerView={1.3}
+          breakpoints={{
+            480: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+          }}
+              className="categorias-swiper"
+        >
             {categoriasData.map((cat) => (
               <SwiperSlide key={cat.id}>
               <div className="categoria-card">
                  <img src={cat.imagenGif} alt="" className="categoria-icono" />
-                <button className="genero-btn">{cat.nombre}</button>
+                <div className="genero-tab">{cat.nombre}</div>
               </div>
-</SwiperSlide>
+            </SwiperSlide>
             ))}
         </Swiper>
       </section>
