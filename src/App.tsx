@@ -4,6 +4,8 @@ import RutaProtegida from "./components/RutaProtegida";
 
 import Home from "./components/Home";
 import Login from "./pages/Login";
+import Novedades from "./components/Novedades";
+import Categorias from "./components/Categorias";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminInicio from "./pages/admin/AdminInicio";
 import MusicaAdmin from "./pages/admin/MusicaAdmin";
@@ -16,6 +18,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/novedades" element={<Novedades />} />
+        <Route path="/categorias" element={<Categorias />} />
 
         <Route element={<RutaProtegida />}>
           <Route path="/admin" element={<AdminLayout />}>
