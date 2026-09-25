@@ -23,6 +23,7 @@ export default function Footer() {
         <Link to="/">Inicio</Link>
         <Link to="/programas">Programas</Link>
         <Link to="/noticias">Noticias</Link>
+        <Link to="/login">Acceso administrador</Link>
       </div>
     </footer>
   );
