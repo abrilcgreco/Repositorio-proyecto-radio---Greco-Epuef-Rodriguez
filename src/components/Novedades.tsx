@@ -1,7 +1,15 @@
-import { noticias } from "../data/noticias";
+import { useState, useEffect } from "react";
+import { obtenerNoticias } from "../data/noticiasStore";
+import type { Noticia } from "../data/noticias";
 import "./Novedades.css";
 
 export default function Novedades() {
+  const [noticias, setNoticias] = useState<Noticia[]>([]);
+
+  useEffect(() => {
+    setNoticias(obtenerNoticias());
+  }, []);
+
   return (
     <main className="novedades">
       <h1 className="novedades-titulo">Noticias y novedades</h1>
@@ -19,15 +27,12 @@ export default function Novedades() {
               target="_blank"
               rel="noreferrer"
               aria-label={`Ver publicacion de ${n.titulo} en Instagram`}
-              style={{ display: "block" }}
             >
               {n.imagen && <img src={n.imagen} alt={n.titulo} />}
             </a>
             <div className="noticia-texto">
               <h2 className="noticia-titulo">{n.titulo}</h2>
-             <p className="noticia-resumen" style={{ fontSize: "0.85em" }}>
-                {n.resumen}
-             </p>
+              <p className="noticia-resumen">{n.resumen}</p>
               <a
                 className="noticia-leer"
                 href={n.instagramUrl || "https://instagram.com"}
@@ -43,7 +48,7 @@ export default function Novedades() {
 
       <section className="redes-banner">
         <h2 className="redes-texto">
-          ¡Para enterarte de mas seguinos en nuestras redes sociales!
+          Para enterarte de mas seguinos en nuestras redes sociales!
         </h2>
 
         <div className="redes-iconos">
