@@ -14,7 +14,6 @@ export default function Header() {
             <li><NavLink to="/categorias">Categorías</NavLink></li>
             <li><NavLink to="/novedades">Novedades</NavLink></li>
           </ul>
-          <Link to="/login" className="header-login">ingresar</Link>
         </nav>
       </div>
     </header>

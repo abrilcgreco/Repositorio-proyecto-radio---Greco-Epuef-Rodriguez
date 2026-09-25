@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import type { Seccion } from "../../data/usuarios";
 import AdminHeader from "../../components/layout/AdminHeader";
@@ -28,6 +28,10 @@ export default function AdminLayout() {
 
       <div className="admin-cuerpo">
         <aside className="admin-sidebar">
+          <Link to="/" className="admin-volver-inicio">
+            ← Volver al inicio
+          </Link>
+
           <p className="admin-sidebar-titulo">Menú administración</p>
           <nav className="admin-nav">
             {visibles.map((s) => (
