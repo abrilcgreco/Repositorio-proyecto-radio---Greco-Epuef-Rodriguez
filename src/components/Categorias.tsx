@@ -44,7 +44,7 @@ export default function Categorias() {
 
   return (
     <main className="categorias" style={estiloFondo}>
-      <h1 className="categorias-titulo">Género</h1>
+      <h1 className="categorias-titulo">{cancion.genero}</h1>
 
       <section className="carrusel" aria-label="Canciones">
         {canciones.map((c, i) => {
