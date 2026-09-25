@@ -23,6 +23,7 @@ export default function Footer() {
         <Link to="/">Inicio</Link>
         <Link to="/programas">Programas</Link>
         <Link to="/noticias">Noticias</Link>
+        <Link to="/login">Acceso administrador</Link>
       </div>
       <Link to="/login" className="footer-admin-link" aria-label="Acceso administrador">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
