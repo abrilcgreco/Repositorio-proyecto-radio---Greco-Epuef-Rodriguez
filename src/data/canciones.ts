@@ -2,6 +2,7 @@ export interface CancionCarrusel {
   id: number;
   nombre: string;
   artista: string;
+  genero: string;
   portada?: string;
 }
 
@@ -22,11 +23,11 @@ export const coloresEscuela: ColorFondo[] = [
 
 // En "portada" va /Portadas/ + el nombre EXACTO del archivo, con su extensión.
 export const canciones: CancionCarrusel[] = [
-  { id: 1, nombre: "De Música Ligera", artista: "Soda Stereo", portada: "/Portadas/cancion1.jpg" },
-  { id: 2, nombre: "A Sky Full of Stars", artista: "Coldplay", portada: "/Portadas/cancion2.jpg" },
-  { id: 3, nombre: "Puente", artista: "Gustavo Cerati", portada: "/Portadas/cancion3.jpg" },
-  { id: 4, nombre: "Persiana Americana", artista: "Soda Stereo", portada: "/Portadas/cancion4.jpg" },
-  { id: 5, nombre: "Ojitos Lindos", artista: "Bad Bunny & Bomba Estéreo", portada: "/Portadas/cancion5.jpg" },
-  { id: 6, nombre: "Me Rehúso", artista: "Danny Ocean", portada: "/Portadas/cancion6.jpg" },
-  { id: 7, nombre: "Por Mil Noches", artista: "Airbag", portada: "/Portadas/cancion7.jpg" },
+  { id: 1, nombre: "De Música Ligera", artista: "Soda Stereo", genero: "Rock", portada: "/Portadas/cancion1.jpg" },
+  { id: 2, nombre: "A Sky Full of Stars", artista: "Coldplay", genero: "Pop", portada: "/Portadas/cancion2.jpg" },
+  { id: 3, nombre: "Puente", artista: "Gustavo Cerati", genero: "Rock", portada: "/Portadas/cancion3.jpg" },
+  { id: 4, nombre: "Persiana Americana", artista: "Soda Stereo", genero: "Rock", portada: "/Portadas/cancion4.jpg" },
+  { id: 5, nombre: "Ojitos Lindos", artista: "Bad Bunny & Bomba Estéreo", genero: "Reggaetón", portada: "/Portadas/cancion5.jpg" },
+  { id: 6, nombre: "Me Rehúso", artista: "Danny Ocean", genero: "Reggaetón", portada: "/Portadas/cancion6.jpg" },
+  { id: 7, nombre: "Por Mil Noches", artista: "Airbag", genero: "Rock", portada: "/Portadas/cancion7.jpg" },
 ];
