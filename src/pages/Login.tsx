@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 
@@ -11,7 +11,6 @@ interface FormularioLogin {
 
 type ErroresLogin = Partial<Record<keyof FormularioLogin, string>>;
 
-// Lo que guardamos en el state de la navegación al patear al login.
 interface EstadoNavegacion {
   desde?: string;
 }
@@ -29,7 +28,6 @@ export default function Login() {
   const [errorGeneral, setErrorGeneral] = useState<string>("");
   const [verPassword, setVerPassword] = useState<boolean>(false);
 
-  // Si ya está logueado, no tiene sentido mostrarle el login.
   if (usuario) {
     return <Navigate to="/admin" replace />;
   }
@@ -80,6 +78,10 @@ export default function Login() {
 
   return (
     <div className="login-pantalla">
+      <Link to="/" className="login-volver">
+        ← Volver al inicio
+      </Link>
+
       <div className="login-caja">
         <h1 className="login-titulo">Panel de administración</h1>
         <p className="login-subtitulo">Ingresá con tu cuenta</p>

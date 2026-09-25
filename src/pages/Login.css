@@ -125,6 +125,24 @@
   color: #8f8ba5;
 }
 
+.login-volver {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.login-volver:hover {
+  opacity: 1;
+}
+
 @media (max-width: 480px) {
   .login-caja {
     padding: 1.5rem;
