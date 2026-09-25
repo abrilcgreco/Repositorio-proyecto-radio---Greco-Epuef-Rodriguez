@@ -1,5 +1,6 @@
 import { useState, createContext, useRef, useContext, useEffect, type ReactNode } from 'react';
-import { playlist, type TrackConDuracion } from '../data/playlist';
+import { type TrackConDuracion } from '../data/playlist';
+import { obtenerPlaylist } from '../data/playlistStore';
 
 interface Track {
   nombre: string;
@@ -56,7 +57,7 @@ export function ReproductorProvider({ children }: ReproductorProviderProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const play = () => {
-    const { track, segundoEnCancion } = calcularEstadoActual(playlist);
+    const { track, segundoEnCancion } = calcularEstadoActual(obtenerPlaylist());
 
     if (audioRef.current) {
       if (currentTrack?.url !== track.url) {
