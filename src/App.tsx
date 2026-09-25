@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RutaProtegida from "./components/RutaProtegida";
+import PublicLayout from "./components/layout/PublicLayout";
 
 import Home from "./components/Home";
 import Login from "./pages/Login";
@@ -16,10 +17,13 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/novedades" element={<Novedades />} />
+          <Route path="/categorias" element={<Categorias />} />
+        </Route>
+
         <Route path="/login" element={<Login />} />
-        <Route path="/novedades" element={<Novedades />} />
-        <Route path="/categorias" element={<Categorias />} />
 
         <Route element={<RutaProtegida />}>
           <Route path="/admin" element={<AdminLayout />}>
