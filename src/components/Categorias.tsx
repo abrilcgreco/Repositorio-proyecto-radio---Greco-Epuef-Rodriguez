@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
 import { canciones, coloresEscuela } from "../data/canciones";
 import "./Categorias.css";
 
@@ -45,50 +43,44 @@ export default function Categorias() {
   } as CSSProperties;
 
   return (
-    <>
-      <Header />
+    <main className="categorias" style={estiloFondo}>
+      <h1 className="categorias-titulo">Género</h1>
 
-      <main className="categorias" style={estiloFondo}>
-        <h1 className="categorias-titulo">Género</h1>
+      <section className="carrusel" aria-label="Canciones">
+        {canciones.map((c, i) => {
+          const pos = posicionRelativa(i, actual);
+          const oculta = Math.abs(pos) >= 3;
+          const clases = ["carrusel-item"];
+          if (pos === 0) clases.push("central");
+          if (oculta) clases.push("oculta");
 
-        <section className="carrusel" aria-label="Canciones">
-          {canciones.map((c, i) => {
-            const pos = posicionRelativa(i, actual);
-            const oculta = Math.abs(pos) >= 3;
-            const clases = ["carrusel-item"];
-            if (pos === 0) clases.push("central");
-            if (oculta) clases.push("oculta");
+          const estilo = {
+            "--x": `${desplazamiento(pos)}px`,
+            zIndex: 10 - Math.abs(pos),
+          } as CSSProperties;
 
-            const estilo = {
-              "--x": `${desplazamiento(pos)}px`,
-              zIndex: 10 - Math.abs(pos),
-            } as CSSProperties;
+          return (
+            <button type="button" key={c.id} className={clases.join(" ")} style={estilo} onClick={() => setActual(i)} aria-label={`${c.nombre}, ${c.artista}`} aria-current={pos === 0 ? "true" : undefined} tabIndex={oculta ? -1 : 0}>
+              {c.portada && <img src={c.portada} alt="" />}
+            </button>
+          );
+        })}
+      </section>
 
-            return (
-              <button type="button" key={c.id} className={clases.join(" ")} style={estilo} onClick={() => setActual(i)} aria-label={`${c.nombre}, ${c.artista}`} aria-current={pos === 0 ? "true" : undefined} tabIndex={oculta ? -1 : 0}>
-                {c.portada && <img src={c.portada} alt="" />}
-              </button>
-            );
-          })}
-        </section>
+      <div className="categorias-info">
+        <p>{cancion.nombre}</p>
+        <p>{cancion.artista}</p>
+      </div>
 
-        <div className="categorias-info">
-          <p>{cancion.nombre}</p>
-          <p>{cancion.artista}</p>
-        </div>
-
-        <button type="button" className="categorias-play" onClick={() => setSonando((s) => !s)} aria-label={sonando ? "Pausar" : "Reproducir"}>
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            {sonando ? (
-              <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-            ) : (
-              <path d="M8 5v14l11-7z" />
-            )}
-          </svg>
-        </button>
-      </main>
-
-      <Footer />
-    </>
+      <button type="button" className="categorias-play" onClick={() => setSonando((s) => !s)} aria-label={sonando ? "Pausar" : "Reproducir"}>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          {sonando ? (
+            <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+          ) : (
+            <path d="M8 5v14l11-7z" />
+          )}
+        </svg>
+      </button>
+    </main>
   );
 }
