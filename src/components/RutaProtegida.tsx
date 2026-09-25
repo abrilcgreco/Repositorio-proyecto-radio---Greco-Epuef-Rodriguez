@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import type { Seccion } from "../data/usuarios";
 
 interface RutaProtegidaProps {
-  // Si se pasa, además de estar logueado exige el permiso de ese rol.
+
   seccion?: Seccion;
 }
 
@@ -15,7 +15,6 @@ export default function RutaProtegida({ seccion }: RutaProtegidaProps) {
     return <p style={{ padding: "2rem" }}>Cargando…</p>;
   }
 
-  // No hay sesión: al login, recordando a dónde quería entrar.
   if (!usuario) {
     return <Navigate to="/login" state={{ desde: location.pathname }} replace />;
   }

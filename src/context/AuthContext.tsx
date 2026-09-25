@@ -28,7 +28,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [usuario, setUsuario] = useState<UsuarioSesion | null>(null);
   const [cargando, setCargando] = useState<boolean>(true);
 
-  // Al arrancar la app, recuperamos la sesión guardada en el navegador.
   useEffect(() => {
     const guardado = localStorage.getItem(CLAVE_STORAGE);
     if (guardado) {
@@ -55,7 +54,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       return { ok: false, error: "Esta cuenta está desactivada." };
     }
 
-    // Armamos la sesión campo por campo para no arrastrar la contraseña.
     const sesion: UsuarioSesion = {
       id: encontrado.id,
       nombre: encontrado.nombre,
@@ -88,7 +86,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   );
 }
 
-// Atajo para no repetir useContext(AuthContext) en cada componente.
 export function useAuth(): AuthContextValor {
   const ctx = useContext(AuthContext);
   if (!ctx) {

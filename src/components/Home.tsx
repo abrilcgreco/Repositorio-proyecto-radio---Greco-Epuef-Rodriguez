@@ -8,16 +8,15 @@ import 'swiper/css/navigation';
 interface Categoria {
   id: number;
   nombre: string;
-  imagenBg?: string;
+  imagenGif?: string;
 }
 
 const categoriasData: Categoria[] = [
-  { id: 1, nombre: 'Género 1' },
-  { id: 2, nombre: 'Género 2' },
-  { id: 3, nombre: 'Género 3' },
-  { id: 4, nombre: 'Género 4' },
-  { id: 5, nombre: 'Género 5' },
-  { id: 6, nombre: 'Género 6' },
+  { id: 1, nombre: 'Rock', imagenGif: '/public/rock.gif' },
+  { id: 2, nombre: 'Pop', imagenGif: '/public/pop.gif' },
+  { id: 3, nombre: 'Cumbia', imagenGif: '/public/cumbia.gif' },
+  { id: 4, nombre: 'Folklore', imagenGif: '/public/folklore.gif' },
+  { id: 5, nombre: 'Electrónica', imagenGif: '/public/electronica.gif' },
 ];
 
 export default function Home() {
@@ -26,10 +25,10 @@ export default function Home() {
       <section className="hero-section">
         <div className="mascota-container">
           <img
-            src="/robotGif.gif"
-            alt="Robot animado Radio 724"
-            className="mascota-img"
-          />
+          src="/robotillie.png"
+          alt="Robot Radio 724"
+          className="mascota-img"
+        />
         </div>
         <div className="reproductor-wrapper">
           <Reproductor />
@@ -40,19 +39,20 @@ export default function Home() {
         <h2 className="categorias-title">Categorías</h2>
 
         <Swiper
-          modules={[Navigation]}
-          navigation
-          spaceBetween={24}
-          slidesPerView={3}
-          className="categorias-swiper"
-        >
-          {categoriasData.map((cat) => (
-            <SwiperSlide key={cat.id}>
+            modules={[Navigation]}
+            navigation
+            spaceBetween={24}
+            slidesPerView={3}
+            className="categorias-swiper"
+          >
+            {categoriasData.map((cat) => (
+              <SwiperSlide key={cat.id}>
               <div className="categoria-card">
+                 <img src={cat.imagenGif} alt="" className="categoria-icono" />
                 <button className="genero-btn">{cat.nombre}</button>
               </div>
-            </SwiperSlide>
-          ))}
+</SwiperSlide>
+            ))}
         </Swiper>
       </section>
     </main>

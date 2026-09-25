@@ -8,17 +8,17 @@ export interface TrackConDuracion {
 
 export const playlist: TrackConDuracion[] = [
   {
-    nombre: 'Canción de prueba 1',
-    artista: 'Artista 1',
-    categoria: 'Prueba',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    duracionSegundos: 180,
+    nombre: 'Eyes',
+    artista: 'Patrick Jordan Patrikios',
+    categoria: 'Electronica',
+    url: '/public/ejemplo1.mp3',
+    duracionSegundos: 310,
   },
   {
-    nombre: 'Canción de prueba 2',
-    artista: 'Artista 2',
-    categoria: 'Prueba',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    duracionSegundos: 210,
+    nombre: 'Frutile',
+    artista: 'The Grey Room',
+    categoria: 'Pop',
+    url: '/public/ejemplo2.mp3',
+    duracionSegundos: 312,
   },
 ];

@@ -51,12 +51,26 @@
 .categoria-card {
   background-color: #262626;
   border-radius: 20px;
-  height: 280px;
+  aspect-ratio: 1 / 1;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 1.5rem;
+  gap: 1.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.categoria-icono {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.categoria-card:hover .categoria-icono {
+  transform: scale(1.1);
+  opacity: 1;
 }
 .categorias-swiper {
   padding: 0 8px;

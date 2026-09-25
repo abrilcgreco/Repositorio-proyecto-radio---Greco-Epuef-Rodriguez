@@ -11,7 +11,6 @@ export interface Usuario {
   activo: boolean;
 }
 
-// El usuario tal como vive en la sesión: igual pero sin la contraseña.
 export type UsuarioSesion = Omit<Usuario, "password">;
 
 export interface DefinicionRol {
@@ -19,8 +18,6 @@ export interface DefinicionRol {
   permisos: Seccion[];
 }
 
-// Usuarios de prueba (mock data).
-// Sin backend, esta lista hace de "base de datos".
 export const usuarios: Usuario[] = [
   {
     id: 1,
@@ -48,7 +45,6 @@ export const usuarios: Usuario[] = [
   },
 ];
 
-// Definición de roles y qué secciones del panel puede ver cada uno.
 export const roles: Record<Rol, DefinicionRol> = {
   admin: {
     etiqueta: "Administrador",
