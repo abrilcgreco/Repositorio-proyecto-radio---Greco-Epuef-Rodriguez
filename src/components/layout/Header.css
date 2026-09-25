@@ -4,8 +4,8 @@
 }
 
 .header-container {
-  min-height: 72px;
-  padding: 10px 40px;
+  min-height: 85px;
+  padding: 10px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,8 +19,8 @@
 }
 
 .header-logo img {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background-color: #ffffff;
   object-fit: cover;
@@ -30,13 +30,13 @@
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 40px;
 }
 
 .header-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 64px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -45,9 +45,9 @@
 .header-links a {
   color: #ffffff;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 4px 0 6px;
+  font-weight: 400;
+  font-size: 1.05rem;
+  padding: 4px 0 10px;
   border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease, opacity 0.2s ease;
 }
@@ -62,12 +62,13 @@
 }
 
 .header-login {
-  background-color: #1a4bb8;
+  background-color: #0b4a8b;
+  border: 1px solid #3a7bc8;
   color: #ffffff;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1rem;
-  padding: 10px 28px;
+  font-size: 1.05rem;
+  padding: 9px 30px;
   border-radius: 10px;
   text-transform: lowercase;
   transition: filter 0.2s ease;

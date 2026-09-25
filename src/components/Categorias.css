@@ -1,0 +1,113 @@
+@property --fondo-arriba {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #2b1911;
+}
+
+@property --fondo-abajo {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #e05e21;
+}
+
+.categorias {
+  min-height: 860px;
+  padding-bottom: 90px;
+  background: linear-gradient(180deg, var(--fondo-arriba) 0%, var(--fondo-abajo) 90%);
+  transition: --fondo-arriba 0.6s ease, --fondo-abajo 0.6s ease;
+}
+
+.categorias-titulo {
+  margin: 0;
+  padding: 45px 0 0 67px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #e0e0e0;
+}
+
+.carrusel {
+  position: relative;
+  height: 407px;
+  margin-top: 89px;
+  overflow: hidden;
+}
+
+.carrusel-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 270px;
+  height: 282px;
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  background: #1e1e1e;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translate(calc(-50% + var(--x, 0px)), -50%);
+  transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.carrusel-item.central {
+  width: 389px;
+  height: 407px;
+  cursor: default;
+}
+
+.carrusel-item.oculta {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carrusel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carrusel-item:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: -3px;
+}
+
+.categorias-info {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--texto, #e0e0e0);
+  transition: color 0.6s ease;
+}
+
+.categorias-info p {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 44px;
+}
+
+.categorias-play {
+  display: grid;
+  place-items: center;
+  width: 98px;
+  height: 98px;
+  margin: 37px auto 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #a8a8a8;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.categorias-play:hover {
+  filter: brightness(1.08);
+}
+
+.categorias-play svg {
+  width: 52px;
+  height: 52px;
+  display: block;
+}

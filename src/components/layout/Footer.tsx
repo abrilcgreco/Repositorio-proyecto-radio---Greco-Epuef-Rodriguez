@@ -21,9 +21,13 @@ export default function Footer() {
       <div className="footer-col">
         <h3 className="rojo">Categorías</h3>
         <Link to="/">Inicio</Link>
-        <Link to="/programas">Programas</Link>
-        <Link to="/noticias">Noticias</Link>
+        <Link to="/categorias">Categorías</Link>
+        <Link to="/novedades">Novedades</Link>
       </div>
+
+      <p className="footer-legal">
+        Taller de Multimedios E.S.E.T.P N724 - Radio Escolar
+      </p>
     </footer>
   );
 }
