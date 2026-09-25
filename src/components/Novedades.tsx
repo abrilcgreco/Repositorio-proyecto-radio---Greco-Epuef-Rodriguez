@@ -13,15 +13,29 @@ export default function Novedades() {
       <section className="noticias-grid">
         {noticias.map((n) => (
           <article key={n.id} className="noticia-card">
-            <div className="noticia-imagen">
+            <a
+              className="noticia-imagen"
+              href={n.instagramUrl || "https://instagram.com"}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Ver publicacion de ${n.titulo} en Instagram`}
+              style={{ display: "block" }}
+            >
               {n.imagen && <img src={n.imagen} alt={n.titulo} />}
-            </div>
+            </a>
             <div className="noticia-texto">
               <h2 className="noticia-titulo">{n.titulo}</h2>
-              <p className="noticia-resumen">{n.resumen}</p>
-              <button type="button" className="noticia-leer">
+             <p className="noticia-resumen" style={{ fontSize: "0.85em" }}>
+                {n.resumen}
+             </p>
+              <a
+                className="noticia-leer"
+                href={n.instagramUrl || "https://instagram.com"}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Leer mas
-              </button>
+              </a>
             </div>
           </article>
         ))}
@@ -29,7 +43,7 @@ export default function Novedades() {
 
       <section className="redes-banner">
         <h2 className="redes-texto">
-          ¡Para enterarte de más seguinos en nuestras redes sociales!
+          ¡Para enterarte de mas seguinos en nuestras redes sociales!
         </h2>
 
         <div className="redes-iconos">
