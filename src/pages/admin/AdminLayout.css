@@ -1,157 +1,665 @@
+/* ===== Panel de administración (estilos de todas las pantallas del admin) ===== */
+
 .admin-layout {
   position: fixed;
   inset: 0;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background: #d9d9d9;
-  color: #222;
+  background: var(--fondo);
+  color: var(--texto);
   text-align: left;
   font-family: "Poppins", system-ui, sans-serif;
 }
 
-.admin-header {
-  flex-shrink: 0;
-  background: #262626;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 1.5rem;
-}
-
-.admin-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  object-fit: cover;
-}
-
-.admin-salir {
-  background: none;
-  border: none;
-  border-bottom: 2px solid #e8621a;
-  border-radius: 0;
-  color: #fff;
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0 0 0.2rem;
-  cursor: pointer;
-}
-
 .admin-cuerpo {
-  flex: 1 0 auto;
+  flex: 1;
+  min-height: 0;
   display: flex;
 }
 
+/* ---- Menú lateral ---- */
 .admin-sidebar {
-  width: 220px;
+  width: 240px;
   flex-shrink: 0;
-  background: #a3a3a3;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+  background: var(--superficie);
+  border-right: 1px solid var(--borde);
+  overflow-y: auto;
 }
 
 .admin-sidebar-titulo {
-  margin: 0 0 0.75rem;
-  font-size: 0.95rem;
-  color: #6b6b6b;
+  margin: 0 0 8px;
+  padding: 0 10px;
+  color: var(--texto-3);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .admin-nav {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 2px;
+  margin-bottom: 24px;
 }
 
 .admin-link {
-  display: block;
-  padding: 0.55rem 0.5rem;
-  text-align: center;
-  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radio-chico);
+  border-left: 3px solid transparent;
+  color: var(--texto-2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.admin-link:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+
+.admin-link.activo {
+  background: var(--naranja-suave);
+  border-left-color: var(--naranja);
+  color: var(--texto);
+}
+
+.admin-link.activo svg {
+  color: var(--naranja);
+}
+
+/* Usuario abajo del menú (se puede tocar para ir a "Mi perfil") */
+.admin-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding: 12px 10px;
+  border-top: 1px solid var(--borde);
+  border-radius: var(--radio-chico);
+  color: var(--texto);
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.admin-usuario:hover {
+  background: var(--superficie-2);
+}
+
+/* Foto de perfil (o la inicial si no hay foto) */
+.admin-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--superficie-2);
+  border: 1px solid var(--borde-fuerte);
+  color: var(--naranja);
+  font-weight: 700;
+  object-fit: cover;
+}
+
+.admin-avatar--grande {
+  width: 96px;
+  height: 96px;
+  font-size: 2.2rem;
+}
+
+.admin-usuario-datos {
+  min-width: 0;
+}
+
+.admin-usuario-datos p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-usuario-nombre {
   font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.admin-usuario-rol {
+  color: var(--texto-3);
+  font-size: 0.75rem;
+}
+
+/* ---- Contenido ---- */
+.admin-contenido {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 28px 32px 40px;
+}
+
+.admin-pagina {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-pagina-encabezado {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-titulo {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.admin-subtitulo {
+  margin: 4px 0 0;
+  color: var(--texto-2);
+  font-size: 0.9rem;
+}
+
+/* ---- Botones ---- */
+.admin-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border: 1px solid var(--naranja);
+  border-radius: var(--radio-chico);
+  background: var(--naranja);
+  color: #1a1a1a;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-boton:hover {
+  background: var(--naranja-hover);
+  border-color: var(--naranja-hover);
+}
+
+.admin-boton--secundario {
+  background: transparent;
+  border-color: var(--borde-fuerte);
+  color: var(--texto);
+}
+
+.admin-boton--secundario:hover {
+  background: var(--superficie-2);
+  border-color: var(--borde-fuerte);
+}
+
+/* ---- Números del panel ---- */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.admin-stat {
+  padding: 16px 18px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.admin-stat-etiqueta {
+  margin: 0 0 6px;
+  color: var(--texto-2);
+  font-size: 0.8rem;
+}
+
+.admin-stat-valor {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-stat-valor span {
+  color: var(--texto-3);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ---- Avisos ---- */
+.admin-aviso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-left: 3px solid var(--naranja);
+  border-radius: var(--radio-chico);
+  font-size: 0.875rem;
+}
+
+.admin-aviso p {
+  margin: 0;
+  color: var(--texto-2);
+}
+
+.admin-aviso strong {
+  color: var(--texto);
+}
+
+.admin-aviso--ok {
+  border-left-color: #3fa66b;
+}
+
+.admin-aviso-link {
+  flex-shrink: 0;
+  color: var(--naranja);
   font-weight: 600;
   text-decoration: none;
 }
 
-.admin-link.activo {
-  background: #0b4a86;
+.admin-aviso-link:hover {
+  text-decoration: underline;
 }
 
-.admin-contenido {
-  flex: 1;
-  min-width: 0;
-  padding: 1.25rem 1.5rem;
+/* ---- Tarjetas ---- */
+.admin-tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  overflow: hidden;
 }
 
-.admin-pie {
-  flex-shrink: 0;
-  background: #3a3a3a;
-  color: #fff;
-  padding: 1.5rem 2rem 1rem;
-  font-size: 0.8rem;
+.admin-tarjeta-encabezado {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--borde);
 }
 
-.admin-pie-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.admin-pie h4 {
-  margin: 0 0 0.6rem;
-  font-size: 0.8rem;
-}
-
-.admin-pie p {
+.admin-tarjeta-encabezado h2 {
   margin: 0;
-  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.admin-pie a {
-  display: block;
-  margin-bottom: 0.3rem;
-  color: #fff;
+.admin-tarjeta-encabezado p {
+  margin: 2px 0 0;
+  color: var(--texto-3);
+  font-size: 0.8rem;
 }
 
-.pie-naranja { color: #e8621a; }
-.pie-amarillo { color: #f5d000; }
-.pie-rojo { color: #e03a2b; }
+.admin-nota {
+  margin: 0;
+  padding: 12px 20px;
+  border-top: 1px solid var(--borde);
+  color: var(--texto-3);
+  font-size: 0.8rem;
+}
 
-.admin-pie .admin-pie-legal {
-  margin-top: 1.5rem;
+/* ---- Tablas ---- */
+.admin-tabla-wrap {
+  overflow-x: auto;
+}
+
+.admin-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.admin-tabla th {
+  padding: 10px 20px;
+  background: var(--superficie-2);
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-3);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-tabla td {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-2);
+  vertical-align: middle;
+}
+
+.admin-tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-tabla tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-tabla .admin-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.admin-celda-fuerte {
+  color: var(--texto) !important;
+  font-weight: 500;
+}
+
+.admin-apagado {
+  color: var(--texto-3) !important;
+}
+
+.admin-vacio {
+  padding: 32px 20px !important;
+  color: var(--texto-3) !important;
   text-align: center;
-  color: #7a7a7a;
-  font-size: 0.7rem;
 }
 
-.admin-volver-inicio {
-  display: block;
-  color: #888;
-  text-decoration: none;
+/* Estado de cada emisora */
+.admin-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-estado--aire {
+  background: rgba(229, 57, 53, 0.12);
+  color: #ff6b66;
+}
+
+.admin-estado--vacia {
+  background: var(--superficie-2);
+  color: var(--texto-3);
+}
+
+.admin-estado-punto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e53935;
+  animation: admin-pulso 1.6s ease-in-out infinite;
+}
+
+@keyframes admin-pulso {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Canción al aire con su barrita de progreso */
+.admin-sonando {
+  min-width: 220px;
+}
+
+.admin-sonando-nombre {
+  margin: 0 0 6px;
+  color: var(--texto);
+  font-weight: 500;
+}
+
+.admin-sonando-nombre span {
+  color: var(--texto-3);
+  font-weight: 400;
+}
+
+.admin-sonando-progreso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--texto-3);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-sonando-barra {
+  flex: 1;
+  max-width: 220px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--borde-fuerte);
+  overflow: hidden;
+}
+
+.admin-sonando-relleno {
+  height: 100%;
+  background: var(--naranja);
+  transition: width 1s linear;
+}
+
+/* Etiqueta de género en la biblioteca */
+.admin-genero {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 4px;
+  color: var(--texto-2);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.admin-eliminar {
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--radio-chico);
+  background: transparent;
+  color: var(--texto-3);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.admin-eliminar:hover {
+  color: #ff6b66;
+  border-color: rgba(229, 57, 53, 0.4);
+  background: rgba(229, 57, 53, 0.08);
+}
+
+/* ---- Buscador y filtro ---- */
+.admin-filtros {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.admin-buscador,
+.admin-select,
+.admin-campo input,
+.admin-campo select {
+  box-sizing: border-box;
+  padding: 9px 12px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-chico);
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease;
+}
+
+.admin-buscador {
+  flex: 1;
+  max-width: 360px;
+}
+
+.admin-buscador::placeholder,
+.admin-campo input::placeholder {
+  color: var(--texto-3);
+}
+
+.admin-buscador:focus,
+.admin-select:focus,
+.admin-campo input:focus,
+.admin-campo select:focus {
+  outline: none;
+  border-color: var(--naranja);
+}
+
+/* ---- Formulario ---- */
+.admin-form {
+  padding: 20px;
+}
+
+.admin-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.admin-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-campo label {
+  color: var(--texto-2);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.admin-campo input,
+.admin-campo select {
+  width: 100%;
+}
+
+.admin-error {
+  margin: 14px 0 0;
+  color: #ff6b66;
   font-size: 0.85rem;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #e0e0e0;
-  transition: color 0.2s ease;
 }
 
-.admin-volver-inicio:hover {
-  color: #e07a3a;
+.admin-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-@media (max-width: 700px) {
+/* ---- Mi perfil ---- */
+.admin-pagina--angosta {
+  max-width: 760px;
+}
+
+.admin-perfil-foto {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+}
+
+.admin-perfil-botones {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-boton-texto {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--texto-3);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.admin-boton-texto:hover {
+  color: #ff6b66;
+  text-decoration: underline;
+}
+
+.admin-tarjeta-encabezado--medio {
+  border-top: 1px solid var(--borde);
+}
+
+.admin-campo input:disabled {
+  color: var(--texto-3);
+  cursor: not-allowed;
+}
+
+.admin-boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- Pantallas chicas ---- */
+@media (max-width: 1000px) {
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
   .admin-cuerpo {
     flex-direction: column;
   }
+
   .admin-sidebar {
     width: auto;
-  }
-  .admin-nav {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--borde);
   }
-  .admin-pie-grid {
+
+  .admin-sidebar-titulo,
+  .admin-usuario {
+    display: none;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    margin: 0;
+  }
+
+  .admin-contenido {
+    padding: 20px 16px 32px;
+  }
+
+  .admin-pagina-encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-campos {
     grid-template-columns: 1fr;
+  }
+
+  .admin-perfil-foto {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-filtros {
+    flex-direction: column;
+  }
+
+  .admin-buscador {
+    max-width: none;
   }
 }

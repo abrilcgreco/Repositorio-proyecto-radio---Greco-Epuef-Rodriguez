@@ -1,143 +1,170 @@
-.home-container {
-  background-color: #d9d9d9;
-  min-height: 100vh;
-  padding: 2rem 4rem;
+/* Ocupa exactamente la pantalla (menos el header) y deja lugar abajo para el reproductor fijo */
+.home {
+  width: min(1280px, calc(100% - 48px));
+  min-height: calc(100vh - 84px);
+  margin: 0 auto;
+  padding: 24px 0 170px;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-}
-
-.hero-section {
-  display: flex;
-  align-items: flex-start;
   justify-content: center;
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  flex-wrap: wrap;
+  gap: 24px;
 }
 
-.mascota-container {
-  flex: 0 0 250px;
+.home-etiqueta {
+  margin: 0 0 6px;
+  color: var(--texto-3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.home-titulo {
+  margin: 0;
+  color: var(--texto);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Cartel: qué se está escuchando (barrita naranja a la izquierda) ---- */
+.home-cartel {
   display: flex;
-  justify-content: right;
-  margin-top: 100px;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--superficie);
+  border-left: 3px solid var(--naranja);
+  border-radius: 0;
+  color: var(--naranja);
 }
 
-.mascota-img {
-  width: 250px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
+.home-cartel svg {
+  flex-shrink: 0;
 }
 
-.reproductor-wrapper {
-  flex: 1;
-  min-width: 280px;
+.home-cartel p {
+  margin: 0;
+  color: var(--texto-2);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-.categorias-section {
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
+.home-cartel strong {
+  color: var(--texto);
+  font-weight: 600;
 }
 
-.categorias-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #000;
-  margin-bottom: 1.5rem;
+/* ---- Géneros ---- */
+.generos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
 }
 
-.categoria-card {
-  background-color: #262626;
-  border-radius: 20px;
+.genero-card {
+  position: relative;
   aspect-ratio: 1 / 1;
-  max-height: 260px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  gap: 14px;
+  padding: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.categoria-icono {
-  width: 100px;
-  height: 100px;
-  max-width: 60%;
+/* Al pasar el mouse: se levanta y se marca en naranja */
+.genero-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--naranja);
+  background: var(--superficie-2);
+  z-index: 5;
+}
+
+.genero-icono {
+  width: 46%;
+  height: 46%;
   object-fit: contain;
-  opacity: 0.85;
-  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.categoria-card:hover .categoria-icono {
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-.categorias-swiper .swiper-button-next,
-.categorias-swiper .swiper-button-prev {
-  color: #2b2b2b;
-  transform: scale(0.7);
-}
-
-.categorias-swiper .swiper-button-next::after,
-.categorias-swiper .swiper-button-prev::after {
-  font-size: 1.6rem;
-}
-
-.genero-tab {
-  background: linear-gradient(135deg, #f0883e, #e06522);
-  color: #ffffff;
-  border-radius: 12px;
-  padding: 0.6rem 2.2rem;
-  font-weight: bold;
-  font-size: 1rem;
+.genero-nombre {
+  color: var(--texto);
+  font-size: 0.95rem;
+  font-weight: 500;
   text-align: center;
-  user-select: none;
-  box-shadow: 0 4px 12px rgba(224, 101, 34, 0.4);
 }
 
-@media (max-width: 900px) {
-  .home-container {
-    padding: 2rem;
-  }
-
-  .hero-section {
-    justify-content: center;
-  }
-
-  .mascota-container {
-    flex: 0 0 auto;
-    margin-top: 0;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .mascota-img {
-    width: 160px;
-  }
+/* Globito "¿Te gustaría escuchar...?" que aparece arriba del cuadrado */
+.genero-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  width: max-content;
+  max-width: 220px;
+  padding: 8px 12px;
+  border-radius: var(--radio-chico);
+  background: #f2f2f2;
+  color: #1a1a1a;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: var(--sombra-flotante);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
-@media (max-width: 600px) {
-  .home-container {
-    padding: 1.25rem;
-    gap: 2rem;
+.genero-tip strong {
+  color: #b9531a;
+}
+
+/* Colita del globito apuntando al cuadrado */
+.genero-tip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 10px;
+  height: 10px;
+  background: #f2f2f2;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.genero-card:hover .genero-tip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 700px) {
+  .home {
+    width: calc(100% - 32px);
+    gap: 18px;
   }
 
-  .categorias-title {
-    font-size: 1.4rem;
+  .home-titulo {
+    font-size: 1.5rem;
   }
 
-  .categoria-icono {
-    width: 70px;
-    height: 70px;
+  .home-cartel p {
+    font-size: 0.88rem;
   }
 
-  .genero-tab {
-    padding: 0.5rem 1.2rem;
-    font-size: 0.9rem;
+  .generos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .genero-nombre {
+    font-size: 0.85rem;
+  }
+
+  /* En el celular no hay mouse: el globito no se usa */
+  .genero-tip {
+    display: none;
   }
 }

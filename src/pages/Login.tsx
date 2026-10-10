@@ -96,7 +96,7 @@ export default function Login() {
               value={form.email}
               onChange={manejarCambio}
               className={errores.email ? "con-error" : ""}
-              placeholder="admin@radio.com"
+              placeholder="tu@email.com"
               autoComplete="username"
             />
             {errores.email && (
@@ -136,13 +136,6 @@ export default function Login() {
             Ingresar
           </button>
         </form>
-
-        <div className="login-ayuda">
-          <strong>Usuarios de prueba</strong>
-          <span>admin@radio.com / admin123</span>
-          <span>editor@radio.com / editor123</span>
-          <span>locutor@radio.com / locutor123</span>
-        </div>
       </div>
     </div>
   );

@@ -1,26 +1,46 @@
-import { NavLink, Outlet, Link } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import type { Seccion } from "../../data/usuarios";
+import { roles } from "../../data/usuarios";
 import AdminHeader from "../../components/layout/AdminHeader";
-import Footer from "../../components/layout/Footer";
+import { leerPerfil, escribirPerfil, type Perfil, type ContextoPerfil } from "./perfil";
 import "./AdminLayout.css";
 
-interface ItemMenu {
-  clave: Seccion;
-  ruta: string;
-  etiqueta: string;
+function IconoPanel() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+    </svg>
+  );
 }
 
-const secciones: ItemMenu[] = [
-  { clave: "musica", ruta: "/admin/musica", etiqueta: "Música" },
-  { clave: "noticias", ruta: "/admin/noticias", etiqueta: "Noticias" },
-  { clave: "usuarios", ruta: "/admin/usuarios", etiqueta: "Usuarios y roles" },
-];
+function IconoMusica() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
+    </svg>
+  );
+}
+
+function claseLink({ isActive }: { isActive: boolean }) {
+  return isActive ? "admin-link activo" : "admin-link";
+}
 
 export default function AdminLayout() {
-  const { tienePermiso } = useAuth();
+  const { usuario, tienePermiso } = useAuth();
+  const clave = usuario?.nombre ?? "invitado";
 
-  const visibles = secciones.filter((s) => tienePermiso(s.clave));
+  const [perfil, setPerfil] = useState<Perfil>(() => leerPerfil(clave, usuario?.nombre ?? ""));
+
+  function guardarPerfil(nuevo: Perfil): void {
+    setPerfil(nuevo);
+    escribirPerfil(clave, nuevo);
+  }
+
+  const rol = usuario ? roles[usuario.rol].etiqueta : "";
+  const nombre = perfil.nombreVisible.trim() || usuario?.nombre || "";
+  const inicial = nombre.charAt(0).toUpperCase() || "?";
+  const contexto: ContextoPerfil = { perfil, guardarPerfil };
 
   return (
     <div className="admin-layout">
@@ -28,32 +48,37 @@ export default function AdminLayout() {
 
       <div className="admin-cuerpo">
         <aside className="admin-sidebar">
-          <Link to="/" className="admin-volver-inicio">
-            ← Volver al inicio
-          </Link>
-
-          <p className="admin-sidebar-titulo">Menú administración</p>
+          <p className="admin-sidebar-titulo">Administración</p>
           <nav className="admin-nav">
-            {visibles.map((s) => (
-              <NavLink
-                key={s.clave}
-                to={s.ruta}
-                className={({ isActive }) =>
-                  isActive ? "admin-link activo" : "admin-link"
-                }
-              >
-                {s.etiqueta}
+            <NavLink to="/admin" end className={claseLink}>
+              <IconoPanel />
+              Panel
+            </NavLink>
+            {tienePermiso("musica") && (
+              <NavLink to="/admin/musica" className={claseLink}>
+                <IconoMusica />
+                Biblioteca musical
               </NavLink>
-            ))}
+            )}
           </nav>
+
+          <NavLink to="/admin/perfil" className="admin-usuario" title="Editar mi perfil">
+            {perfil.foto ? (
+              <img src={perfil.foto} alt="" className="admin-avatar" />
+            ) : (
+              <span className="admin-avatar" aria-hidden="true">{inicial}</span>
+            )}
+            <div className="admin-usuario-datos">
+              <p className="admin-usuario-nombre">{nombre}</p>
+              <p className="admin-usuario-rol">{perfil.cargo.trim() || rol}</p>
+            </div>
+          </NavLink>
         </aside>
 
         <main className="admin-contenido">
-          <Outlet />
+          <Outlet context={contexto} />
         </main>
       </div>
-
-      <Footer />
     </div>
   );
 }

@@ -1,0 +1,2174 @@
+﻿===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\layout\AdminHeader.tsx
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import './Header.css';
+
+export default function AdminHeader() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  function salir(): void {
+    logout();
+    navigate("/", { replace: true });
+  }
+
+  return (
+    <header className="header">
+      <div className="header-container">
+        <Link to="/admin" className="header-logo" aria-label="Inicio">
+          <img src="/logo.png" alt="Logo de la radio" />
+        </Link>
+        <nav className="header-nav">
+          <ul className="header-links">
+            <li><NavLink to="/admin" end>Inicio</NavLink></li>
+          </ul>
+        </nav>
+        <button className="admin-salir" onClick={salir}>
+          Salir de administrador
+        </button>
+      </div>
+    </header>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\layout\Footer.css
+.site-footer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  background: #3a3a3a;
+  padding: 30px 60px 24px;
+}
+
+.footer-col h3 {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.footer-col p {
+  margin: 0;
+  max-width: 298px;
+  color: #ddd;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.footer-col a {
+  display: block;
+  margin-bottom: 4px;
+  color: #ddd;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-decoration: underline;
+}
+
+.footer-legal {
+  grid-column: 1 / -1;
+  margin: 50px 0 0;
+  text-align: center;
+  color: #6f6f6f;
+  font-size: 1.1rem;
+}
+
+.naranja { color: #e8571c; }
+.amarillo { color: #f5d10f; }
+.rojo { color: #e5262d; }
+
+@media (min-width: 1100px) {
+  .site-footer {
+    grid-template-columns: 545px 428px 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); padding: 20px 25px; gap: 20px; }
+}
+
+@media (max-width: 480px) {
+  .site-footer { grid-template-columns: 1fr; text-align: center; padding: 20px; }
+  .footer-col p { max-width: none; text-align: center; }
+}
+
+.footer-admin-link {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  color: #888;
+  font-size: 0.75rem;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.footer-admin-link:hover {
+  opacity: 1;
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\layout\Footer.tsx
+import { Link } from "react-router-dom";
+import "./Footer.css";
+
+export default function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="footer-col">
+        <h3 className="naranja">Sobre Nosotros</h3>
+        <p>
+          Somos un taller de multimedios de la E.S.E.T.P. NÂº724, sonamos todos los dÃ­as a toda hora con mÃºsica, ideas y compaÃ±Ã­a para toda la comunidad. 
+        </p>
+      </div>
+
+      <div className="footer-col">
+        <h3 className="amarillo">Redes</h3>
+        <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+        <a href="https://sitio-institucional.com" target="_blank" rel="noreferrer">Sitio institucional</a>
+      </div>
+
+      <div className="footer-col">
+        <h3 className="rojo">CategorÃ­as</h3>
+        <Link to="/">Inicio</Link>
+        <Link to="/categorias">CategorÃ­as</Link>
+        <Link to="/novedades">Novedades</Link>
+      </div>
+
+      <Link to="/login" className="footer-admin-link" aria-label="Acceso administrador">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm3 8H9V7a3 3 0 016 0v3z" />
+        </svg>
+      </Link>
+
+      <p className="footer-legal">
+        Taller de Multimedios E.S.E.T.P N724 - Radio Escolar
+      </p>
+    </footer>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\layout\Header.css
+.header {
+  background-color: #212121;
+  width: 100%;
+}
+
+.header-container {
+  min-height: 85px;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  object-fit: cover;
+  display: block;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1.05rem;
+  padding: 4px 0 10px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.header-links a:hover {
+  opacity: 0.85;
+}
+
+.header-links a.active {
+  border-bottom-color: #e07a3a;
+  opacity: 1;
+}
+
+.header-login {
+  background-color: #0b4a8b;
+  border: 1px solid #3a7bc8;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 9px 30px;
+  border-radius: 10px;
+  text-transform: lowercase;
+  transition: filter 0.2s ease;
+}
+
+.header-login:hover {
+  filter: brightness(1.12);
+}
+
+@media (max-width: 700px) {
+  .header-container {
+    padding: 10px 16px;
+  }
+
+  .header-nav,
+  .header-links {
+    gap: 16px;
+  }
+
+  .header-login {
+    padding: 8px 18px;
+  }
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\layout\Header.tsx
+import { Link, NavLink } from 'react-router-dom';
+import './Header.css';
+
+export default function Header() {
+  return (
+    <header className="header">
+      <div className="header-container">
+        <Link to="/" className="header-logo" aria-label="Inicio">
+        <img src="/logo.png" alt="Logo de la radio" />
+        </Link>
+        <nav className="header-nav">
+          <ul className="header-links">
+            <li><NavLink to="/" end>Inicio</NavLink></li>
+            <li><NavLink to="/categorias">CategorÃ­as</NavLink></li>
+            <li><NavLink to="/novedades">Novedades</NavLink></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\layout\PublicLayout.tsx
+import { Outlet } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
+
+export default function PublicLayout() {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\reproductor\Reproductor.css
+.reproductor {
+  background-color: #a8a8a4;
+  border-radius: 24px;
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "info track"
+    "controles track";
+  column-gap: 40px;
+  row-gap: 24px;
+  box-shadow: 0 20px 40px -10px rgba(224, 122, 58, 0.35);
+}
+
+.reproductor-info {
+  grid-area: info;
+}
+
+.reproductor-info h3 {
+  color: #1a1a1a;
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.reproductor-info p {
+  color: #2b2b2b;
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+}
+
+.reproductor-controles {
+  grid-area: controles;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.reproductor-play {
+  background-color: #e07a3a;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.reproductor-barra {
+  flex: 1;
+  height: 8px;
+  background-color: #e0e0de;
+  border-radius: 4px;
+  position: relative;
+}
+
+.reproductor-barra-progreso {
+  height: 100%;
+  background-color: #e07a3a;
+  border-radius: 4px;
+  position: relative;
+}
+
+.reproductor-barra-progreso::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: #e07a3a;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+}
+
+.reproductor-track {
+  grid-area: track;
+  align-self: center;
+  text-align: right;
+}
+
+.reproductor-nombre,
+.reproductor-artista {
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.reproductor-categoria {
+  color: #e07a3a;
+  margin: 4px 0 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.reproductor-onda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 56px;
+}
+
+.reproductor-onda span {
+  display: block;
+  width: 6px;
+  height: 8px;
+  background-color: #e07a3a;
+  border-radius: 3px;
+  transition: height 0.2s ease;
+}
+
+.reproductor-onda--activa span {
+  animation: onda-sonido 1s ease-in-out infinite;
+}
+
+.reproductor-onda--activa span:nth-child(1) {
+  animation-delay: 0s;
+}
+.reproductor-onda--activa span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.reproductor-onda--activa span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.reproductor-onda--activa span:nth-child(4) {
+  animation-delay: 0.1s;
+}
+
+@keyframes onda-sonido {
+  0%, 100% {
+    height: 8px;
+  }
+  50% {
+    height: 48px;
+  }
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\reproductor\Reproductor.tsx
+import { useReproductor } from '../../context/ReproductorContext';
+import './Reproductor.css';
+
+export default function Reproductor() {
+  const { isPlaying, currentTrack, togglePlay } = useReproductor();
+
+  return (
+    <div className="reproductor">
+      <div className="reproductor-info">
+        <h3>Radio 724</h3>
+        <p>Escuchanos las 24 horas - mÃºsica, entrevistas y producciones</p>
+      </div>
+
+      <div className="reproductor-controles">
+        <button className="reproductor-play" onClick={togglePlay}>
+          {isPlaying ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16" rx="1" />
+              <rect x="14" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          )}
+        </button>
+
+        <div className={`reproductor-onda ${isPlaying ? 'reproductor-onda--activa' : ''}`}>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div className="reproductor-track">
+        <p className="reproductor-nombre">{currentTrack?.nombre ?? 'Nombre de canciÃ³n'}</p>
+        <p className="reproductor-artista">{currentTrack?.artista ?? 'Artista'}</p>
+        <p className="reproductor-categoria">{currentTrack?.categoria ?? 'CategorÃ­a'}</p>
+      </div>
+    </div>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\Categorias.css
+@property --fondo-arriba {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #2b1911;
+}
+
+@property --fondo-abajo {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #e05e21;
+}
+
+.categorias {
+  min-height: 860px;
+  padding-bottom: 90px;
+  background: linear-gradient(180deg, var(--fondo-arriba) 0%, var(--fondo-abajo) 90%);
+  transition: --fondo-arriba 0.6s ease, --fondo-abajo 0.6s ease;
+}
+
+.categorias-titulo {
+  margin: 0;
+  padding: 45px 0 0 67px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #e0e0e0;
+}
+
+.carrusel {
+  position: relative;
+  height: 407px;
+  margin-top: 89px;
+  overflow: hidden;
+}
+
+.carrusel-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 270px;
+  height: 282px;
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  background: #1e1e1e;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translate(calc(-50% + var(--x, 0px)), -50%);
+  transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.carrusel-item.central {
+  width: 389px;
+  height: 407px;
+  cursor: default;
+}
+
+.carrusel-item.oculta {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carrusel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carrusel-item:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: -3px;
+}
+
+.categorias-info {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--texto, #e0e0e0);
+  transition: color 0.6s ease;
+}
+
+.categorias-info p {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 44px;
+}
+
+.categorias-play {
+  display: grid;
+  place-items: center;
+  width: 98px;
+  height: 98px;
+  margin: 37px auto 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #a8a8a8;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.categorias-play:hover {
+  filter: brightness(1.08);
+}
+
+.categorias-play svg {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\Categorias.tsx
+import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
+import { canciones, coloresEscuela } from "../data/canciones";
+import "./Categorias.css";
+
+const TOTAL = canciones.length;
+const SEPARACION_CENTRO = 353.5;
+const SEPARACION_LATERAL = 294;
+
+function posicionRelativa(indice: number, actual: number): number {
+  let d = (indice - actual) % TOTAL;
+  if (d > TOTAL / 2) d -= TOTAL;
+  if (d < -TOTAL / 2) d += TOTAL;
+  return d;
+}
+
+function desplazamiento(pos: number): number {
+  if (pos === 0) return 0;
+  const signo = pos > 0 ? 1 : -1;
+  return signo * (SEPARACION_CENTRO + (Math.abs(pos) - 1) * SEPARACION_LATERAL);
+}
+
+export default function Categorias() {
+  const [actual, setActual] = useState<number>(0);
+  const [sonando, setSonando] = useState<boolean>(false);
+
+  useEffect(() => {
+    function teclas(e: KeyboardEvent): void {
+      if (e.key === "ArrowRight") setActual((a) => (a + 1) % TOTAL);
+      if (e.key === "ArrowLeft") setActual((a) => (a - 1 + TOTAL) % TOTAL);
+    }
+    window.addEventListener("keydown", teclas);
+    return () => window.removeEventListener("keydown", teclas);
+  }, []);
+
+  const cancion = canciones[actual];
+  const color = coloresEscuela[actual % coloresEscuela.length];
+
+  const estiloFondo = {
+    "--fondo-arriba": color.oscuro,
+    "--fondo-abajo": color.claro,
+    "--texto": color.texto,
+  } as CSSProperties;
+
+  return (
+    <main className="categorias" style={estiloFondo}>
+      <h1 className="categorias-titulo">{cancion.genero}</h1>
+
+      <section className="carrusel" aria-label="Canciones">
+        {canciones.map((c, i) => {
+          const pos = posicionRelativa(i, actual);
+          const oculta = Math.abs(pos) >= 3;
+          const clases = ["carrusel-item"];
+          if (pos === 0) clases.push("central");
+          if (oculta) clases.push("oculta");
+
+          const estilo = {
+            "--x": `${desplazamiento(pos)}px`,
+            zIndex: 10 - Math.abs(pos),
+          } as CSSProperties;
+
+          return (
+            <button type="button" key={c.id} className={clases.join(" ")} style={estilo} onClick={() => setActual(i)} aria-label={`${c.nombre}, ${c.artista}`} aria-current={pos === 0 ? "true" : undefined} tabIndex={oculta ? -1 : 0}>
+              {c.portada && <img src={c.portada} alt="" />}
+            </button>
+          );
+        })}
+      </section>
+
+      <div className="categorias-info">
+        <p>{cancion.nombre}</p>
+        <p>{cancion.artista}</p>
+      </div>
+
+      <button type="button" className="categorias-play" onClick={() => setSonando((s) => !s)} aria-label={sonando ? "Pausar" : "Reproducir"}>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          {sonando ? (
+            <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+          ) : (
+            <path d="M8 5v14l11-7z" />
+          )}
+        </svg>
+      </button>
+    </main>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\Home.css
+.home-container {
+  background-color: #d9d9d9;
+  min-height: 100vh;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.hero-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.mascota-container {
+  flex: 0 0 250px;
+  display: flex;
+  justify-content: right;
+  margin-top: 100px;
+}
+
+.mascota-img {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.reproductor-wrapper {
+  flex: 1;
+  min-width: 280px;
+}
+
+.categorias-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.categorias-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.categoria-card {
+  background-color: #262626;
+  border-radius: 20px;
+  aspect-ratio: 1 / 1;
+  max-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.categoria-icono {
+  width: 100px;
+  height: 100px;
+  max-width: 60%;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.categoria-card:hover .categoria-icono {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.categorias-swiper .swiper-button-next,
+.categorias-swiper .swiper-button-prev {
+  color: #2b2b2b;
+  transform: scale(0.7);
+}
+
+.categorias-swiper .swiper-button-next::after,
+.categorias-swiper .swiper-button-prev::after {
+  font-size: 1.6rem;
+}
+
+.genero-tab {
+  background: linear-gradient(135deg, #f0883e, #e06522);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.6rem 2.2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(224, 101, 34, 0.4);
+}
+
+@media (max-width: 900px) {
+  .home-container {
+    padding: 2rem;
+  }
+
+  .hero-section {
+    justify-content: center;
+  }
+
+  .mascota-container {
+    flex: 0 0 auto;
+    margin-top: 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .mascota-img {
+    width: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 1.25rem;
+    gap: 2rem;
+  }
+
+  .categorias-title {
+    font-size: 1.4rem;
+  }
+
+  .categoria-icono {
+    width: 70px;
+    height: 70px;
+  }
+
+  .genero-tab {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\Home.tsx
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import Reproductor from '../components/reproductor/Reproductor';
+import './Home.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+interface Categoria {
+  id: number;
+  nombre: string;
+  imagenGif?: string;
+}
+
+const categoriasData: Categoria[] = [
+  { id: 1, nombre: 'Rock', imagenGif: '/public/rock.gif' },
+  { id: 2, nombre: 'Pop', imagenGif: '/public/pop.gif' },
+  { id: 3, nombre: 'Cumbia', imagenGif: '/public/cumbia.gif' },
+  { id: 4, nombre: 'Folklore', imagenGif: '/public/folklore.gif' },
+  { id: 5, nombre: 'ElectrÃ³nica', imagenGif: '/public/electronica.gif' },
+];
+
+export default function Home() {
+  return (
+    <main className="home-container">
+      <section className="hero-section">
+        <div className="mascota-container">
+          <img
+          src="/robotillie.png"
+          alt="Robot Radio 724"
+          className="mascota-img"
+        />
+        </div>
+        <div className="reproductor-wrapper">
+          <Reproductor />
+        </div>
+      </section>
+
+      <section className="categorias-section">
+        <h2 className="categorias-title">Â¡GÃ©neros que tenemos para vos!</h2>
+
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={20}
+          slidesPerView={1.3}
+          breakpoints={{
+            480: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+          }}
+              className="categorias-swiper"
+        >
+            {categoriasData.map((cat) => (
+              <SwiperSlide key={cat.id}>
+              <div className="categoria-card">
+                 <img src={cat.imagenGif} alt="" className="categoria-icono" />
+                <div className="genero-tab">{cat.nombre}</div>
+              </div>
+            </SwiperSlide>
+            ))}
+        </Swiper>
+      </section>
+    </main>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\Novedades.css
+.novedades {
+  padding: 30px 60px 0;
+}
+
+.novedades-titulo {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
+
+.novedades-subtitulo {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  color: #000;
+}
+
+/* ---- Tarjetas ---- */
+.noticias-grid {
+  max-width: 1066px;
+  margin: 80px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 47px 103px;
+}
+
+.noticia-card {
+  display: flex;
+  align-items: center;
+  gap: 39px;
+  min-height: 222px;
+  padding: 0 42px;
+  background: #262626;
+  border: 1px solid #111;
+  border-radius: 20px;
+}
+
+.noticia-imagen {
+  flex-shrink: 0;
+  width: 161px;
+  height: 144px;
+  background: #1c1c1c;
+  border: 1px solid #4a4a4a;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.noticia-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.noticia-texto {
+  flex: 1;
+  height: 144px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.noticia-titulo {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.noticia-resumen {
+  margin: 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.noticia-leer {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f5d40f;
+}
+
+.noticia-leer:hover {
+  text-decoration: underline;
+}
+
+/* ---- Banner amarillo de redes ---- */
+.redes-banner {
+  position: relative;
+  max-width: 1065px;
+  min-height: 409px;
+  margin: 110px auto 107px;
+  padding: 43px 37px;
+  background: #f4cb17;
+  border-radius: 60px;
+  overflow-x: clip;
+}
+
+.redes-texto {
+  width: 452px;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: justify;
+  color: #000;
+}
+
+.redes-iconos {
+  display: flex;
+  gap: 90px;
+  margin: 70px 0 0 88px;
+}
+
+.redes-iconos a {
+  width: 68px;
+  height: 68px;
+  color: #000;
+}
+
+.redes-iconos svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.redes-mascota {
+  position: absolute;
+  left: 815px;
+  bottom: 0;
+  height: 468px;
+  width: auto;
+  transform: translateX(-50%);
+}
+
+/* ---- Pantallas chicas ---- */
+@media (max-width: 1000px) {
+  .novedades {
+    padding: 24px 20px 0;
+  }
+
+  .noticias-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .noticia-card {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .redes-banner {
+    margin: 60px auto;
+    padding: 30px 20px;
+  }
+
+  .redes-texto {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  .redes-iconos {
+    margin: 30px 0 0;
+    gap: 40px;
+  }
+
+  .redes-mascota {
+    position: static;
+    transform: none;
+    display: block;
+    height: 260px;
+    margin: 20px auto 0;
+  }
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\Novedades.tsx
+import { useState, useEffect } from "react";
+import { obtenerNoticias } from "../data/noticiasStore";
+import type { Noticia } from "../data/noticias";
+import "./Novedades.css";
+
+export default function Novedades() {
+  const [noticias, setNoticias] = useState<Noticia[]>([]);
+
+  useEffect(() => {
+    setNoticias(obtenerNoticias());
+  }, []);
+
+  return (
+    <main className="novedades">
+      <h1 className="novedades-titulo">Noticias y novedades</h1>
+      <p className="novedades-subtitulo">
+        Enterate de las Actividades del taller, producciones destacadas y
+        encuentros interescuela
+      </p>
+
+      <section className="noticias-grid">
+        {noticias.map((n) => (
+          <article key={n.id} className="noticia-card">
+            <a
+              className="noticia-imagen"
+              href={n.instagramUrl || "https://instagram.com"}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Ver publicacion de ${n.titulo} en Instagram`}
+            >
+              {n.imagen && <img src={n.imagen} alt={n.titulo} />}
+            </a>
+            <div className="noticia-texto">
+              <h2 className="noticia-titulo">{n.titulo}</h2>
+              <p className="noticia-resumen">{n.resumen}</p>
+              <a
+                className="noticia-leer"
+                href={n.instagramUrl || "https://instagram.com"}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Leer mas
+              </a>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section className="redes-banner">
+        <h2 className="redes-texto">
+          Para enterarte de mas seguinos en nuestras redes sociales!
+        </h2>
+
+        <div className="redes-iconos">
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+              <circle cx="12" cy="12" r="4.5" />
+              <circle cx="17.7" cy="6.3" r="0.9" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+
+        <img className="redes-mascota" src="/ili.png" alt="Mascota de la radio" />
+      </section>
+    </main>
+  );
+}
+
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\components\RutaProtegida.tsx
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import type { Seccion } from "../data/usuarios";
+
+interface RutaProtegidaProps {
+
+  seccion?: Seccion;
+}
+
+export default function RutaProtegida({ seccion }: RutaProtegidaProps) {
+  const { usuario, cargando, tienePermiso } = useAuth();
+  const location = useLocation();
+
+  if (cargando) {
+    return <p style={{ padding: "2rem" }}>Cargandoâ€¦</p>;
+  }
+
+  if (!usuario) {
+    return <Navigate to="/login" state={{ desde: location.pathname }} replace />;
+  }
+
+  // Hay sesiÃ³n pero el rol no alcanza: lo mandamos al inicio del panel.
+  if (seccion && !tienePermiso(seccion)) {
+    return <Navigate to="/admin" replace />;
+  }
+
+  return <Outlet />;
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\context\AuthContext.tsx
+import { createContext, useContext, useState, useEffect } from "react";
+import type { ReactNode } from "react";
+import { usuarios, roles } from "../data/usuarios";
+import type { UsuarioSesion, Seccion } from "../data/usuarios";
+
+interface ResultadoLogin {
+  ok: boolean;
+  error?: string;
+}
+
+interface AuthContextValor {
+  usuario: UsuarioSesion | null;
+  cargando: boolean;
+  login: (email: string, password: string) => ResultadoLogin;
+  logout: () => void;
+  tienePermiso: (seccion: Seccion) => boolean;
+}
+
+const AuthContext = createContext<AuthContextValor | null>(null);
+
+const CLAVE_STORAGE = "radio_sesion";
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
+  const [usuario, setUsuario] = useState<UsuarioSesion | null>(null);
+  const [cargando, setCargando] = useState<boolean>(true);
+
+  useEffect(() => {
+    const guardado = localStorage.getItem(CLAVE_STORAGE);
+    if (guardado) {
+      try {
+        setUsuario(JSON.parse(guardado) as UsuarioSesion);
+      } catch {
+        localStorage.removeItem(CLAVE_STORAGE);
+      }
+    }
+    setCargando(false);
+  }, []);
+
+  function login(email: string, password: string): ResultadoLogin {
+    const encontrado = usuarios.find(
+      (u) =>
+        u.email.toLowerCase() === email.trim().toLowerCase() &&
+        u.password === password
+    );
+
+    if (!encontrado) {
+      return { ok: false, error: "Email o contraseÃ±a incorrectos." };
+    }
+    if (!encontrado.activo) {
+      return { ok: false, error: "Esta cuenta estÃ¡ desactivada." };
+    }
+
+    const sesion: UsuarioSesion = {
+      id: encontrado.id,
+      nombre: encontrado.nombre,
+      email: encontrado.email,
+      rol: encontrado.rol,
+      activo: encontrado.activo,
+    };
+
+    setUsuario(sesion);
+    localStorage.setItem(CLAVE_STORAGE, JSON.stringify(sesion));
+    return { ok: true };
+  }
+
+  function logout(): void {
+    setUsuario(null);
+    localStorage.removeItem(CLAVE_STORAGE);
+  }
+
+  function tienePermiso(seccion: Seccion): boolean {
+    if (!usuario) return false;
+    return roles[usuario.rol].permisos.includes(seccion);
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{ usuario, cargando, login, logout, tienePermiso }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth(): AuthContextValor {
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error("useAuth debe usarse dentro de <AuthProvider>");
+  }
+  return ctx;
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\context\ReproductorContext.tsx
+import { useState, createContext, useRef, useContext, useEffect, type ReactNode } from 'react';
+import { type TrackConDuracion } from '../data/playlist';
+import { obtenerPlaylist } from '../data/playlistStore';
+
+interface Track {
+  nombre: string;
+  artista: string;
+  categoria: string;
+  url: string;
+}
+
+interface ReproductorProviderProps {
+  children: ReactNode;
+}
+
+interface ReproductorContextType {
+  isPlaying: boolean;
+  currentTrack: Track | null;
+  progress: number;
+  duration: number;
+  setProgress: (value: number) => void;
+  volume: number;
+  setVolume: (value: number) => void;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
+  play: () => void;
+  pause: () => void;
+  togglePlay: () => void;
+  setTrack: (track: Track) => void;
+}
+
+export const ReproductorContext = createContext<ReproductorContextType | null>(null);
+
+const RADIO_START = new Date('2026-01-01T00:00:00').getTime();
+
+function calcularEstadoActual(lista: TrackConDuracion[]) {
+  const duracionTotal = lista.reduce((acc, t) => acc + t.duracionSegundos, 0);
+  const segundosTranscurridos = Math.floor((Date.now() - RADIO_START) / 1000) % duracionTotal;
+
+  let acumulado = 0;
+  for (const track of lista) {
+    if (segundosTranscurridos < acumulado + track.duracionSegundos) {
+      return { track, segundoEnCancion: segundosTranscurridos - acumulado };
+    }
+    acumulado += track.duracionSegundos;
+  }
+
+  return { track: lista[0], segundoEnCancion: 0 };
+}
+
+export function ReproductorProvider({ children }: ReproductorProviderProps) {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [progress, setProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(1);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const play = () => {
+    const { track, segundoEnCancion } = calcularEstadoActual(obtenerPlaylist());
+
+    if (audioRef.current) {
+      if (currentTrack?.url !== track.url) {
+        audioRef.current.src = track.url;
+      }
+      audioRef.current.currentTime = segundoEnCancion;
+      audioRef.current.play();
+    }
+
+    setCurrentTrack(track);
+    setIsPlaying(true);
+  };
+
+  const pause = () => {
+    audioRef.current?.pause();
+    setIsPlaying(false);
+  };
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      pause();
+    } else {
+      play();
+    }
+  };
+
+  const setTrack = (track: Track) => {
+    setCurrentTrack(track);
+    if (audioRef.current) {
+      audioRef.current.src = track.url;
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const actualizarProgreso = () => setProgress(audio.currentTime);
+    const actualizarDuracion = () => setDuration(audio.duration);
+
+    audio.addEventListener('timeupdate', actualizarProgreso);
+    audio.addEventListener('loadedmetadata', actualizarDuracion);
+
+    return () => {
+      audio.removeEventListener('timeupdate', actualizarProgreso);
+      audio.removeEventListener('loadedmetadata', actualizarDuracion);
+    };
+  }, []);
+
+  const value = {
+    isPlaying,
+    currentTrack,
+    progress,
+    duration,
+    setProgress,
+    volume,
+    setVolume,
+    audioRef,
+    play,
+    pause,
+    togglePlay,
+    setTrack,
+  };
+
+  return (
+    <ReproductorContext.Provider value={value}>
+      <audio ref={audioRef} />
+      {children}
+    </ReproductorContext.Provider>
+  );
+}
+
+export function useReproductor() {
+  const context = useContext(ReproductorContext);
+
+  if (!context) {
+    throw new Error('useReproductor debe usarse dentro de un ReproductorProvider');
+  }
+
+  return context;
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\canciones.ts
+export interface CancionCarrusel {
+  id: number;
+  nombre: string;
+  artista: string;
+  genero: string;
+  portada?: string;
+}
+
+export interface ColorFondo {
+  nombre: string;
+  oscuro: string;
+  claro: string;
+  texto: string;
+}
+
+export const coloresEscuela: ColorFondo[] = [
+  { nombre: "Naranja", oscuro: "#2b1911", claro: "#e05e21", texto: "#e0e0e0" },
+  { nombre: "Azul", oscuro: "#101c2e", claro: "#1b64b8", texto: "#e0e0e0" },
+  { nombre: "Rojo", oscuro: "#2b1212", claro: "#d92b2b", texto: "#e0e0e0" },
+  { nombre: "Verde", oscuro: "#11261a", claro: "#2f9e4f", texto: "#e0e0e0" },
+  { nombre: "Amarillo", oscuro: "#2b2510", claro: "#f0c419", texto: "#2b2510" },
+];
+
+// En "portada" va /Portadas/ + el nombre EXACTO del archivo, con su extensiÃ³n.
+export const canciones: CancionCarrusel[] = [
+  { id: 1, nombre: "De MÃºsica Ligera", artista: "Soda Stereo", genero: "Rock", portada: "/Portadas/cancion1.jpg" },
+  { id: 2, nombre: "A Sky Full of Stars", artista: "Coldplay", genero: "Pop", portada: "/Portadas/cancion2.jpg" },
+  { id: 3, nombre: "Puente", artista: "Gustavo Cerati", genero: "Rock", portada: "/Portadas/cancion3.jpg" },
+  { id: 4, nombre: "Persiana Americana", artista: "Soda Stereo", genero: "Rock", portada: "/Portadas/cancion4.jpg" },
+  { id: 5, nombre: "Ojitos Lindos", artista: "Bad Bunny & Bomba EstÃ©reo", genero: "ReggaetÃ³n", portada: "/Portadas/cancion5.jpg" },
+  { id: 6, nombre: "Me RehÃºso", artista: "Danny Ocean", genero: "ReggaetÃ³n", portada: "/Portadas/cancion6.jpg" },
+  { id: 7, nombre: "Por Mil Noches", artista: "Airbag", genero: "Rock", portada: "/Portadas/cancion7.jpg" },
+];
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\categorias.ts
+export const categorias: string[] = [
+  "Rock",
+  "Pop",
+  "Folklore",
+  "Cumbia",
+  "Cuarteto",
+  "ElectrÃ³nica",
+  "Otros",
+];
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\noticias.ts
+export interface Noticia {
+  id: number;
+  titulo: string;
+  resumen: string;
+  textoCompleto: string;
+  imagen?: string;
+  instagramUrl?: string;
+}
+
+export const noticias: Noticia[] = [
+  {
+    id: 1,
+    titulo: "Estudiantina",
+    resumen: "Les dejamos ðŸ“¸ de lo que fueron estas primeras jornada de la estudiantina 2026.",
+    textoCompleto: `El martes comenzamos con la decoraciÃ³n de las aulas, donde cada curso puso su creatividad y sus colores para preparar la escuela para esta semana. AdemÃ¡s, los estudiantes de 7Â° y los preceptores organizaron distintas modalidades de juegos para que todos pudieran participar y disfrutar de la jornada.
+
+El miÃ©rcoles llegÃ³ el momento del desfile "Me equivoquÃ© de lugar", donde participaron todos aquellos estudiantes y docentes que se animaron a disfrazarse y sorprender con sus ideas y ocurrencias.`,
+    imagen: "/Noticias/imagen1.jpeg",
+    instagramUrl: "https://www.instagram.com/p/DdqwmPkEcjG/",
+  },
+  {
+    id: 2,
+    titulo: "Salida",
+    resumen: "Salida a la laguna Cacique Chiquichano",
+    textoCompleto: `El dÃ­a jueves 17 de septiembre los estudiantes de 1Â°1Â° y 1Â°4Â° realizaron una salida a la laguna Cacique Chiquichano. Donde pudieron compartir y realizar actividades desde educaciÃ³n fÃ­sica, en el marco de la educaciÃ³n ambiental integral y la conservaciÃ³n del medio ambiente. Todo un lujo!!!
+
+Gracias a los estudiante por asistir y a los profesores que acompaÃ±aron`,
+    imagen: "/Noticias/imagen2.jpeg",
+    instagramUrl: "https://www.instagram.com/p/DdpmCoRiZQu/",
+  },
+  {
+    id: 3,
+    titulo: "DÃ­a del Maestro",
+    resumen: "ðŸ“š Celebrando a quienes dejan huella",
+    textoCompleto: `En el marco del DÃ­a del Maestro, nuestra ESETP N.Âº 724 realizÃ³ un acto especial para reconocer y celebrar a nuestros docentes, destacando esas cualidades y gestos que hacen la diferencia en la vida cotidiana de la escuela.
+
+Durante la jornada se llevÃ³ adelante la entrega de premios impresos en 3D, realizados especialmente para la ocasiÃ³n, en diferentes ternas. Los reconocimientos fueron definidos a travÃ©s de la votaciÃ³n de los distintos cursos, haciendo que cada premio tuviera un valor aÃºn mÃ¡s especial: fueron los propios estudiantes quienes eligieron a sus docentes.
+
+ðŸ‘ Queremos agradecer especialmente al equipo de Preceptores y de POT, que estuvo a cargo de la organizaciÃ³n y realizaciÃ³n de este acto.
+
+Â¡Feliz DÃ­a del Maestro! â¤ï¸`,
+    imagen: "/Noticias/imagen3.jpeg",
+    instagramUrl: "https://www.instagram.com/p/DdJUowNEVoR/",
+  },
+  {
+    id: 4,
+    titulo: "Feria Provincial",
+    resumen: "ðŸ”¬âœ¨ Orgullo 724 en la Feria Provincial de EducaciÃ³n, Ciencia, Arte y TecnologÃ­a",
+    textoCompleto: `Nuestra ESETP N.Âº 724 "Dr. Arturo Umberto Illia" dijo presente en la Instancia Provincial de la Feria de EducaciÃ³n, Ciencia, Arte y TecnologÃ­a, compartiendo el trabajo, la creatividad y el compromiso de nuestros estudiantes y docentes.
+
+En esta oportunidad, nuestra instituciÃ³n estuvo representada por dos proyectos:
+
+ðŸŒ±âš¡ ENERGICARRERAS, una propuesta que integra todos los talleres de los tres aÃ±os del Ciclo BÃ¡sico TÃ©cnico, articulando saberes y experiencias con una mirada puesta en nuestra orientaciÃ³n en EnergÃ­as Renovables. El proyecto estÃ¡ a cargo de las docentes Natacha Gader y Joana PÃ©rez.
+
+â™»ï¸ðŸ‘— REPILCHE, proyecto desarrollado por estudiantes de 7.Âº aÃ±o, que propone una mirada innovadora sobre la moda circular y el aprovechamiento de materiales, transformando ideas en soluciones desde la tecnologÃ­a, la creatividad y la sustentabilidad.
+
+Esta participaciÃ³n nos permitiÃ³ mostrar el enorme trabajo que se realiza en nuestra instituciÃ³n, donde la ciencia, el arte y la tecnologÃ­a se encuentran con la educaciÃ³n tÃ©cnica para generar nuevos aprendizajes y proyectos.
+
+ðŸ‘ Queremos felicitar especialmente a las estudiantes Chorolque y Fiore, quienes, junto al trabajo y acompaÃ±amiento de sus docentes, lograron que ENERGICARRERAS obtuviera el pase a la prÃ³xima instancia: la Feria Nacional de EducaciÃ³n en Ciencias, TecnologÃ­a, Artes y MatemÃ¡tica. ðŸ‡¦ðŸ‡·
+
+Â¡Felicitaciones a todos los estudiantes, docentes y familias que forman parte de estos proyectos y hacen posible que el Orgullo 724 siga creciendo y llegando cada vez mÃ¡s lejos! ðŸš€`,
+    imagen: "/Noticias/imagen4.jpeg",
+    instagramUrl: "https://www.instagram.com/p/DcmjvB5iewA/",
+  },
+];
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\noticiasStore.ts
+import { noticias as noticiasBase } from "./noticias";
+import type { Noticia } from "./noticias";
+
+const CLAVE = "radio_noticias_extra";
+
+function leerExtra(): Noticia[] {
+  const guardadas = localStorage.getItem(CLAVE);
+  return guardadas ? (JSON.parse(guardadas) as Noticia[]) : [];
+}
+
+function guardarExtra(lista: Noticia[]): void {
+  localStorage.setItem(CLAVE, JSON.stringify(lista));
+}
+
+export function obtenerNoticias(): Noticia[] {
+  return [...noticiasBase, ...leerExtra()];
+}
+
+export function agregarNoticia(n: Omit<Noticia, "id">): void {
+  const extra = leerExtra();
+  extra.push({ ...n, id: Date.now() });
+  guardarExtra(extra);
+}
+
+export function editarNoticia(id: number, n: Omit<Noticia, "id">): void {
+  const extra = leerExtra();
+  const idx = extra.findIndex((x) => x.id === id);
+  if (idx !== -1) {
+    extra[idx] = { ...n, id };
+    guardarExtra(extra);
+  }
+}
+
+export function eliminarNoticia(id: number): void {
+  guardarExtra(leerExtra().filter((n) => n.id !== id));
+}
+
+export function esEditable(id: number): boolean {
+  return leerExtra().some((n) => n.id === id);
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\playlist.ts
+export interface TrackConDuracion {
+  nombre: string;
+  artista: string;
+  categoria: string;
+  url: string;
+  duracionSegundos: number;
+}
+
+export const playlist: TrackConDuracion[] = [
+  {
+    nombre: 'Eyes',
+    artista: 'Patrick Jordan Patrikios',
+    categoria: 'Electronica',
+    url: '/public/ejemplo1.mp3',
+    duracionSegundos: 310,
+  },
+  {
+    nombre: 'Frutile',
+    artista: 'The Grey Room',
+    categoria: 'Pop',
+    url: '/public/ejemplo2.mp3',
+    duracionSegundos: 312,
+  },
+];
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\playlistStore.ts
+import { playlist as playlistBase } from "./playlist";
+import type { TrackConDuracion } from "./playlist";
+
+const CLAVE = "radio_playlist_extra";
+
+function leerExtra(): TrackConDuracion[] {
+  const guardadas = localStorage.getItem(CLAVE);
+  return guardadas ? (JSON.parse(guardadas) as TrackConDuracion[]) : [];
+}
+
+function guardarExtra(lista: TrackConDuracion[]): void {
+  localStorage.setItem(CLAVE, JSON.stringify(lista));
+}
+
+export function obtenerPlaylist(): TrackConDuracion[] {
+  return [...playlistBase, ...leerExtra()];
+}
+
+export function agregarCancion(track: TrackConDuracion): void {
+  const extra = leerExtra();
+  extra.push(track);
+  guardarExtra(extra);
+}
+
+export function eliminarCancion(url: string): void {
+  guardarExtra(leerExtra().filter((t) => t.url !== url));
+}
+
+export function esEditable(url: string): boolean {
+  return leerExtra().some((t) => t.url === url);
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\data\usuarios.ts
+export type Rol = "admin" | "editor" | "locutor";
+
+export type Seccion = "musica" | "producciones" | "noticias" | "usuarios";
+
+export interface Usuario {
+  id: number;
+  nombre: string;
+  email: string;
+  password: string;
+  rol: Rol;
+  activo: boolean;
+}
+
+export type UsuarioSesion = Omit<Usuario, "password">;
+
+export interface DefinicionRol {
+  etiqueta: string;
+  permisos: Seccion[];
+}
+
+export const usuarios: Usuario[] = [
+  {
+    id: 1,
+    nombre: "Abril Greco",
+    email: "admin@radio.com",
+    password: "admin123",
+    rol: "admin",
+    activo: true,
+  },
+  {
+    id: 2,
+    nombre: "Carla Editora",
+    email: "editor@radio.com",
+    password: "editor123",
+    rol: "editor",
+    activo: true,
+  },
+  {
+    id: 3,
+    nombre: "Juan Locutor",
+    email: "locutor@radio.com",
+    password: "locutor123",
+    rol: "locutor",
+    activo: true,
+  },
+];
+
+export const roles: Record<Rol, DefinicionRol> = {
+  admin: {
+    etiqueta: "Administrador",
+    permisos: ["musica", "producciones", "noticias", "usuarios"],
+  },
+  editor: {
+    etiqueta: "Editor",
+    permisos: ["musica", "noticias"],
+  },
+  locutor: {
+    etiqueta: "Locutor",
+    permisos: ["producciones"],
+  },
+};
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\hooks\useReproductor.ts
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\pages\Canciones.tsx
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\pages\Generos.tsx
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\pages\Home.tsx
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import Reproductor from '../components/reproductor/Reproductor';
+import './Home.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+interface Categoria {
+  id: number;
+  nombre: string;
+  imagenBg?: string;
+}
+
+const categoriasData: Categoria[] = [
+  { id: 1, nombre: 'GÃ©nero 1' },
+  { id: 2, nombre: 'GÃ©nero 2' },
+  { id: 3, nombre: 'GÃ©nero 3' },
+  { id: 4, nombre: 'GÃ©nero 4' },
+  { id: 5, nombre: 'GÃ©nero 5' },
+  { id: 6, nombre: 'GÃ©nero 6' },
+];
+
+export default function Home() {
+  return (
+    <main className="home-container">
+      <section className="hero-section">
+        <div className="mascota-container">
+          <img
+            src="/robotGif.gif"
+            alt="Robot animado Radio 724"
+            className="mascota-img"
+          />
+        </div>
+        <div className="reproductor-wrapper">
+          <Reproductor />
+        </div>
+      </section>
+
+      <section className="categorias-section">
+        <h2 className="categorias-title">CategorÃ­as</h2>
+
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={20}
+          slidesPerView={3}
+          className="categorias-swiper"
+        >
+          {categoriasData.map((cat) => (
+            <SwiperSlide key={cat.id}>
+              <div className="categoria-card">
+                <button className="genero-btn">{cat.nombre}</button>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+    </main>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\pages\Login.css
+.login-pantalla {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #14121c 0%, #241d3d 100%);
+}
+
+.login-caja {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  background: #1e1b2b;
+  border: 1px solid #322c47;
+  border-radius: 14px;
+  padding: 2rem;
+  color: #ececf1;
+}
+
+.login-titulo {
+  margin: 0 0 0.25rem;
+  font-size: 1.4rem;
+  color: #f1eefc;
+}
+
+.login-subtitulo {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  color: #a09cb5;
+}
+
+.login-campo {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.login-campo label {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #c9c5db;
+}
+
+.login-campo input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #3b3455;
+  background: #16141f;
+  color: #ececf1;
+  font-size: 0.95rem;
+}
+
+.login-campo input:focus {
+  outline: none;
+  border-color: #7c5cff;
+}
+
+.login-campo input.con-error {
+  border-color: #e0576b;
+}
+
+.login-password {
+  position: relative;
+  display: flex;
+}
+
+.login-ver {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #a09cb5;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.login-error {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #e0576b;
+}
+
+.login-alerta {
+  background: rgba(224, 87, 107, 0.12);
+  border: 1px solid #e0576b;
+  color: #ffb3bf;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.login-boton {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: #7c5cff;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-boton:hover {
+  background: #6b4ae8;
+}
+
+.login-ayuda {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #322c47;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.78rem;
+  color: #8f8ba5;
+}
+
+.login-volver {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.login-volver:hover {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .login-caja {
+    padding: 1.5rem;
+  }
+  .login-titulo {
+    font-size: 1.2rem;
+  }
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\pages\Login.tsx
+import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { useNavigate, useLocation, Navigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import "./Login.css";
+
+interface FormularioLogin {
+  email: string;
+  password: string;
+}
+
+type ErroresLogin = Partial<Record<keyof FormularioLogin, string>>;
+
+interface EstadoNavegacion {
+  desde?: string;
+}
+
+export default function Login() {
+  const { usuario, login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [form, setForm] = useState<FormularioLogin>({
+    email: "",
+    password: "",
+  });
+  const [errores, setErrores] = useState<ErroresLogin>({});
+  const [errorGeneral, setErrorGeneral] = useState<string>("");
+  const [verPassword, setVerPassword] = useState<boolean>(false);
+
+  if (usuario) {
+    return <Navigate to="/admin" replace />;
+  }
+
+  function manejarCambio(e: ChangeEvent<HTMLInputElement>): void {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setErrores((prev) => ({ ...prev, [name]: "" }));
+    setErrorGeneral("");
+  }
+
+  function validar(): ErroresLogin {
+    const nuevos: ErroresLogin = {};
+
+    if (!form.email.trim()) {
+      nuevos.email = "El email es obligatorio.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      nuevos.email = "IngresÃ¡ un email vÃ¡lido.";
+    }
+
+    if (!form.password) {
+      nuevos.password = "La contraseÃ±a es obligatoria.";
+    } else if (form.password.length < 6) {
+      nuevos.password = "Debe tener al menos 6 caracteres.";
+    }
+
+    return nuevos;
+  }
+
+  function manejarEnvio(e: FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+
+    const nuevos = validar();
+    if (Object.keys(nuevos).length > 0) {
+      setErrores(nuevos);
+      return;
+    }
+
+    const resultado = login(form.email, form.password);
+    if (!resultado.ok) {
+      setErrorGeneral(resultado.error ?? "No se pudo iniciar sesiÃ³n.");
+      return;
+    }
+
+    const estado = location.state as EstadoNavegacion | null;
+    navigate(estado?.desde ?? "/admin", { replace: true });
+  }
+
+  return (
+    <div className="login-pantalla">
+      <Link to="/" className="login-volver">
+        â† Volver al inicio
+      </Link>
+
+      <div className="login-caja">
+        <h1 className="login-titulo">Panel de administraciÃ³n</h1>
+        <p className="login-subtitulo">IngresÃ¡ con tu cuenta</p>
+
+        <form onSubmit={manejarEnvio} noValidate>
+          <div className="login-campo">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={manejarCambio}
+              className={errores.email ? "con-error" : ""}
+              placeholder="admin@radio.com"
+              autoComplete="username"
+            />
+            {errores.email && (
+              <span className="login-error">{errores.email}</span>
+            )}
+          </div>
+
+          <div className="login-campo">
+            <label htmlFor="password">ContraseÃ±a</label>
+            <div className="login-password">
+              <input
+                id="password"
+                name="password"
+                type={verPassword ? "text" : "password"}
+                value={form.password}
+                onChange={manejarCambio}
+                className={errores.password ? "con-error" : ""}
+                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                className="login-ver"
+                onClick={() => setVerPassword((v) => !v)}
+              >
+                {verPassword ? "Ocultar" : "Ver"}
+              </button>
+            </div>
+            {errores.password && (
+              <span className="login-error">{errores.password}</span>
+            )}
+          </div>
+
+          {errorGeneral && <div className="login-alerta">{errorGeneral}</div>}
+
+          <button type="submit" className="login-boton">
+            Ingresar
+          </button>
+        </form>
+
+        <div className="login-ayuda">
+          <strong>Usuarios de prueba</strong>
+          <span>admin@radio.com / admin123</span>
+          <span>editor@radio.com / editor123</span>
+          <span>locutor@radio.com / locutor123</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\App.css
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\App.tsx
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import RutaProtegida from "./components/RutaProtegida";
+import PublicLayout from "./components/layout/PublicLayout";
+
+import Home from "./components/Home";
+import Login from "./pages/Login";
+import Novedades from "./components/Novedades";
+import Categorias from "./components/Categorias";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminInicio from "./pages/admin/AdminInicio";
+import MusicaAdmin from "./pages/admin/MusicaAdmin";
+import NoticiasAdmin from "./pages/admin/NoticiasAdmin";
+import UsuariosAdmin from "./pages/admin/UsuariosAdmin";
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/novedades" element={<Novedades />} />
+          <Route path="/categorias" element={<Categorias />} />
+        </Route>
+
+        <Route path="/login" element={<Login />} />
+
+        <Route element={<RutaProtegida />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminInicio />} />
+
+            <Route element={<RutaProtegida seccion="musica" />}>
+              <Route path="musica" element={<MusicaAdmin />} />
+            </Route>
+
+            <Route element={<RutaProtegida seccion="noticias" />}>
+              <Route path="noticias" element={<NoticiasAdmin />} />
+            </Route>
+
+            <Route element={<RutaProtegida seccion="usuarios" />}>
+              <Route path="usuarios" element={<UsuariosAdmin />} />
+            </Route>
+          </Route>
+        </Route>
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </AuthProvider>
+  );
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\Categorias.tsx
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\Estilos.css
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\Footer.tsx
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\Header.tsx
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\index.css
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #d9d9d9;
+}
+
+.page {
+  min-height: calc(100vh - 72px);
+}
+
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\index.ts
+export interface Genero {
+    id: number;
+    nombre: string;
+}
+export interface Cancion {
+    id: number;
+    titulo: string;
+    artista: string;
+    duracion: string;
+    genero: Genero;
+    estado: "Autorizado" | "Pendiente";
+}
+export interface Produccion {
+    id: number;
+    tÃ­tulo: string;
+    autor: string;
+    fecha: string;
+    estado: "Autorizado" | "Pendiente";
+}
+export interface Noticias {
+    id: number;
+    titulo: string;
+    contenido: string;
+    fecha: string;
+    estado: "Autorizado" | "Pendiente";
+}
+export interface Usuario {
+    id: number;
+    nombre: string;
+    correo: string;
+    rol: "Autorizado" | "Pendiente";
+}
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\main.tsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { ReproductorProvider } from './context/ReproductorContext'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <BrowserRouter>
+      <ReproductorProvider>
+        <App />
+      </ReproductorProvider>
+    </BrowserRouter>
+  </StrictMode>,
+)
+===== C:\Users\abril\OneDrive\Desktop\Radio\Repositorio-proyecto-radio---Greco-Epuef-Rodriguez\src\vite-env.d.ts
+/// <reference types="vite/client" />
+

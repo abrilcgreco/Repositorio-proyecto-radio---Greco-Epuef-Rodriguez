@@ -6,19 +6,20 @@ export interface TrackConDuracion {
   duracionSegundos: number;
 }
 
+// Los archivos de la carpeta public/ se usan desde la raíz: "/ejemplo1.mp3", sin "/public".
 export const playlist: TrackConDuracion[] = [
   {
     nombre: 'Eyes',
     artista: 'Patrick Jordan Patrikios',
-    categoria: 'Electronica',
-    url: '/public/ejemplo1.mp3',
+    categoria: 'Electrónica',
+    url: '/ejemplo1.mp3',
     duracionSegundos: 310,
   },
   {
     nombre: 'Frutile',
     artista: 'The Grey Room',
     categoria: 'Pop',
-    url: '/public/ejemplo2.mp3',
+    url: '/ejemplo2.mp3',
     duracionSegundos: 312,
   },
 ];

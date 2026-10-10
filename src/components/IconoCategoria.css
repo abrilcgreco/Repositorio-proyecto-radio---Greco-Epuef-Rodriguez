@@ -1,0 +1,124 @@
+/* Todas las piezas animadas giran o escalan desde coordenadas del dibujo (viewBox 64x64) */
+.icono-genero * {
+  transform-box: view-box;
+}
+
+/* Rock: la guitarra se balancea y el rayo titila */
+.ic-rock-guitarra {
+  transform-origin: 32px 50px;
+  animation: ic-balanceo 2.4s ease-in-out infinite;
+}
+.ic-rock-rayo {
+  animation: ic-titila 1.6s steps(2) infinite;
+}
+
+/* Pop: el micrófono se inclina y los brillos aparecen y desaparecen */
+.ic-pop-mic {
+  transform-origin: 32px 56px;
+  animation: ic-balanceo 3s ease-in-out infinite;
+}
+.ic-brillo {
+  animation: ic-brillo 2.2s ease-in-out infinite;
+}
+.ic-brillo.b1 { transform-origin: 12px 17.6px; }
+.ic-brillo.b2 { transform-origin: 53px 30.2px; animation-delay: 0.7s; }
+.ic-brillo.b3 { transform-origin: 49px 49.5px; animation-delay: 1.4s; }
+
+/* Folklore: el palo golpea el bombo */
+.ic-palo {
+  transform-origin: 36px 24px;
+  animation: ic-golpe 1.2s ease-in infinite;
+}
+.ic-bombo {
+  transform-origin: 32px 55px;
+  animation: ic-rebote 1.2s ease-in infinite;
+}
+
+/* Cumbia: las maracas se sacuden en contratiempo */
+.ic-maraca.m1 {
+  transform-origin: 12px 56px;
+  animation: ic-sacude 0.7s ease-in-out infinite alternate;
+}
+.ic-maraca.m2 {
+  transform-origin: 52px 56px;
+  animation: ic-sacude 0.7s ease-in-out infinite alternate-reverse;
+}
+.ic-vibra {
+  animation: ic-titila 0.7s ease-in-out infinite alternate;
+}
+
+/* Cuarteto: el fuelle del acordeón se abre y se cierra */
+.ic-fuelle {
+  transform-origin: 32px 32px;
+  animation: ic-fuelle 1.6s ease-in-out infinite;
+}
+
+/* Electrónica: ecualizador */
+.ic-eq {
+  transform-origin: 0 52px;
+  animation: ic-eq 0.9s ease-in-out infinite alternate;
+}
+.ic-eq.e2 { animation-delay: 0.25s; }
+.ic-eq.e3 { animation-delay: 0.5s; }
+.ic-eq.e4 { animation-delay: 0.15s; }
+
+/* Otros: el vinilo gira */
+.ic-vinilo {
+  transform-origin: 30px 34px;
+  animation: ic-gira 4s linear infinite;
+}
+
+/* Al pasar el mouse (o en la tarjeta del centro del carrusel) todo se mueve más rápido */
+.genero-card:hover .icono-genero *,
+.carrusel-item.central .icono-genero * {
+  animation-duration: 0.6s;
+}
+.genero-card:hover .ic-vinilo,
+.carrusel-item.central .ic-vinilo {
+  animation-duration: 1.8s;
+}
+
+@keyframes ic-balanceo {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+@keyframes ic-titila {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@keyframes ic-brillo {
+  0%, 100% { transform: scale(0.4); opacity: 0.2; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+@keyframes ic-golpe {
+  0%, 60% { transform: rotate(-22deg); }
+  80% { transform: rotate(4deg); }
+  100% { transform: rotate(-22deg); }
+}
+@keyframes ic-rebote {
+  0%, 75% { transform: scaleY(1); }
+  82% { transform: scaleY(0.95); }
+  100% { transform: scaleY(1); }
+}
+@keyframes ic-sacude {
+  from { transform: rotate(-9deg); }
+  to { transform: rotate(9deg); }
+}
+@keyframes ic-fuelle {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.7); }
+}
+@keyframes ic-eq {
+  from { transform: scaleY(0.3); }
+  to { transform: scaleY(1); }
+}
+@keyframes ic-gira {
+  to { transform: rotate(360deg); }
+}
+
+/* Respeta a quien tiene desactivadas las animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  .icono-genero * {
+    animation: none !important;
+  }
+}

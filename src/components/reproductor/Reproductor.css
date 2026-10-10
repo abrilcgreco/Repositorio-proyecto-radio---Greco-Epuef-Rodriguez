@@ -1,145 +1,395 @@
+/* Reproductor fijo abajo. Si la lista está abierta (--lista), se achica y se corre a la izquierda. */
 .reproductor {
-  background-color: #a8a8a4;
-  border-radius: 24px;
-  padding: 32px 40px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "info track"
-    "controles track";
-  column-gap: 40px;
-  row-gap: 24px;
-  box-shadow: 0 20px 40px -10px rgba(224, 122, 58, 0.35);
+  position: fixed;
+  left: calc((100% - var(--lista, 0px)) / 2);
+  bottom: 16px;
+  transform: translateX(-50%);
+  width: min(1280px, calc(100% - var(--lista, 0px) - 48px));
+  z-index: 50;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 12px 24px 12px 160px;
+  box-shadow: 0 -6px 36px -6px rgba(232, 118, 47, 0.45), 0 0 0 1px rgba(232, 118, 47, 0.18), var(--sombra-flotante);
+  transition: left 0.35s ease, width 0.35s ease;
+}
+
+/* Illi: asoma por arriba del reproductor. Si le hacés clic, habla. */
+.reproductor-mascota {
+  position: absolute;
+  left: 14px;
+  bottom: 8px;
+  width: 128px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.reproductor-mascota img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+}
+
+/* ---- Globo de diálogo de Illi: aparece, se queda un rato y se va ---- */
+.illi-globo {
+  position: absolute;
+  left: 92px;
+  bottom: calc(100% + 40px);
+  max-width: 250px;
+  margin: 0;
+  padding: 9px 13px;
+  background: #f2f2f2;
+  color: #1a1a1a;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.4;
+  border-radius: 10px 10px 10px 2px;
+  box-shadow: var(--sombra-flotante);
+  pointer-events: none;
+  transform-origin: 0 100%;
+  animation: illi-globo 5.5s ease-out forwards;
+}
+
+/* Colita del globo apuntando a la cabeza de Illi */
+.illi-globo::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: #f2f2f2;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+@keyframes illi-globo {
+  0% { opacity: 0; transform: translateY(8px); }
+  6% { opacity: 1; transform: none; }
+  88% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+.reproductor-cuerpo {
+  min-width: 0;
+}
+
+.reproductor-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .reproductor-info {
-  grid-area: info;
+  min-width: 0;
+}
+
+/* "Radio 724" con la marca de EN VIVO al lado */
+.reproductor-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .reproductor-info h3 {
-  color: #1a1a1a;
   margin: 0;
-  font-size: 1.15rem;
+  color: var(--texto);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.reproductor-vivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 4px;
+  color: var(--texto-3);
+  font-size: 0.68rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.reproductor-vivo-punto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--texto-3);
+}
+
+/* Mientras suena: texto blanco y puntito rojo que late */
+.reproductor-vivo.sonando {
+  color: var(--texto);
+  border-color: rgba(229, 38, 45, 0.5);
+}
+
+.reproductor-vivo.sonando .reproductor-vivo-punto {
+  background: #e5262d;
+  animation: vivo-late 1.4s ease-in-out infinite;
+}
+
+@keyframes vivo-late {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
 }
 
 .reproductor-info p {
-  color: #2b2b2b;
-  margin: 4px 0 0;
-  font-size: 0.85rem;
+  margin: 2px 0 0;
+  color: var(--texto-2);
+  font-size: 0.8rem;
+}
+
+.reproductor-info strong {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.reproductor-track {
+  text-align: right;
+  min-width: 0;
+}
+
+.reproductor-track p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reproductor-nombre {
+  color: var(--texto);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.reproductor-artista {
+  color: var(--texto-2);
+  font-size: 0.88rem;
+}
+
+.reproductor-categoria {
+  color: var(--texto-3);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+/* Etiqueta de mix/aleatorio: texto simple con el ícono en naranja */
+.reproductor-categoria--mix {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reproductor-categoria--mix svg {
+  width: 14px;
+  height: 14px;
+  color: var(--naranja);
 }
 
 .reproductor-controles {
-  grid-area: controles;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.reproductor-boton {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio-chico);
+  border: none;
+  background: transparent;
+  color: var(--texto-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.reproductor-boton:hover {
+  color: var(--texto);
+  background: var(--superficie-2);
+}
+
+/* ---- Botón "Lista de canciones": con texto para que se entienda a cualquier edad ---- */
+.reproductor-boton-lista {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-chico);
+  background: transparent;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.reproductor-boton-lista svg {
+  color: var(--naranja);
+}
+
+.reproductor-boton-lista:hover {
+  border-color: var(--texto-3);
+  background: var(--superficie-2);
+}
+
+.reproductor-boton-lista.abierta {
+  border-color: var(--naranja);
+  background: var(--naranja-suave);
+}
+
+.reproductor-aleatorio {
+  position: relative;
+}
+
+.reproductor-aleatorio.activo {
+  color: var(--naranja);
+}
+
+/* Puntito debajo del ícono cuando está activo, como en Spotify */
+.reproductor-aleatorio.activo::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--naranja);
 }
 
 .reproductor-play {
-  background-color: #e07a3a;
-  color: #1a1a1a;
-  border: none;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
   border-radius: 50%;
-  width: 72px;
-  height: 72px;
-  min-width: 72px;
-  font-size: 1.6rem;
+  border: none;
+  background: var(--naranja);
+  color: #141414;
+  display: grid;
+  place-items: center;
   cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.reproductor-play:hover {
+  background: var(--naranja-hover);
+  transform: scale(1.04);
+}
+
+/* Género sin canciones: el play queda gris */
+.reproductor-play:disabled {
+  background: var(--borde-fuerte);
+  color: var(--texto-3);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Ocupa el espacio del medio para empujar el volumen a la derecha */
+.reproductor-espacio {
+  flex: 1;
+}
+
+.reproductor-volumen {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.reproductor-volumen input[type='range'] {
+  width: 100px;
+  height: 3px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--texto) var(--relleno), var(--borde-fuerte) var(--relleno));
+  cursor: pointer;
+}
+
+.reproductor-volumen input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.reproductor-volumen input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.reproductor-progreso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  color: var(--texto-3);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .reproductor-barra {
   flex: 1;
-  height: 8px;
-  background-color: #e0e0de;
-  border-radius: 4px;
-  position: relative;
+  height: 3px;
+  background: var(--borde-fuerte);
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.reproductor-barra-progreso {
+.reproductor-barra-relleno {
   height: 100%;
-  background-color: #e07a3a;
-  border-radius: 4px;
-  position: relative;
+  background: var(--naranja);
+  border-radius: 2px;
+  transition: width 0.25s linear;
 }
 
-.reproductor-barra-progreso::after {
-  content: '';
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: #e07a3a;
-  border-radius: 50%;
-  border: 3px solid #ffffff;
-}
-
-.reproductor-track {
-  grid-area: track;
-  align-self: center;
-  text-align: right;
-}
-
-.reproductor-nombre,
-.reproductor-artista {
-  color: #1a1a1a;
-  margin: 0;
-  font-weight: 500;
-  font-size: 1.3rem;
-  line-height: 1.4;
-}
-
-.reproductor-categoria {
-  color: #e07a3a;
-  margin: 4px 0 0;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-.reproductor-onda {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 56px;
-}
-
-.reproductor-onda span {
-  display: block;
-  width: 6px;
-  height: 8px;
-  background-color: #e07a3a;
-  border-radius: 3px;
-  transition: height 0.2s ease;
-}
-
-.reproductor-onda--activa span {
-  animation: onda-sonido 1s ease-in-out infinite;
-}
-
-.reproductor-onda--activa span:nth-child(1) {
-  animation-delay: 0s;
-}
-.reproductor-onda--activa span:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.reproductor-onda--activa span:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.reproductor-onda--activa span:nth-child(4) {
-  animation-delay: 0.1s;
-}
-
-@keyframes onda-sonido {
-  0%, 100% {
-    height: 8px;
+/* Respeta a quien tiene desactivadas las animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  .reproductor-vivo.sonando .reproductor-vivo-punto {
+    animation: none;
   }
-  50% {
-    height: 48px;
+}
+
+@media (max-width: 760px) {
+  .reproductor {
+    width: calc(100% - 24px);
+    padding: 12px 16px;
+  }
+
+  .reproductor-mascota,
+  .reproductor-info p,
+  .illi-globo {
+    display: none;
+  }
+
+  .reproductor-controles {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .reproductor-boton-lista {
+    padding: 7px 10px;
+    font-size: 0.82rem;
+  }
+
+  .reproductor-volumen input[type='range'] {
+    width: 70px;
   }
 }

@@ -22,7 +22,6 @@ export default function Footer() {
         <h3 className="rojo">Categorías</h3>
         <Link to="/">Inicio</Link>
         <Link to="/categorias">Categorías</Link>
-        <Link to="/novedades">Novedades</Link>
       </div>
 
       <Link to="/login" className="footer-admin-link" aria-label="Acceso administrador">

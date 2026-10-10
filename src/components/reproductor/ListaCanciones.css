@@ -1,0 +1,170 @@
+/* Panel lateral de la lista de canciones: entra desde la derecha, debajo del header */
+.lista-panel {
+  position: fixed;
+  top: 84px;
+  right: 0;
+  bottom: 0;
+  width: 380px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie);
+  border-left: 1px solid var(--borde);
+  box-shadow: var(--sombra-flotante);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0s linear 0.35s;
+}
+
+.lista-panel.abierta {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.35s ease;
+}
+
+.lista-encabezado {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 14px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.lista-encabezado h4 {
+  margin: 0;
+  color: var(--texto);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.lista-ayuda {
+  margin: 4px 0 0;
+  color: var(--texto-2);
+  font-size: 0.88rem;
+}
+
+.lista-cerrar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radio-chico);
+  background: transparent;
+  color: var(--texto-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.lista-cerrar:hover {
+  color: var(--texto);
+  background: var(--superficie-2);
+}
+
+.lista-contenido {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 20px 20px;
+}
+
+/* Títulos de sección chicos, en gris y mayúsculas */
+.lista-seccion {
+  margin: 22px 0 8px;
+  color: var(--texto-3);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lista-contenido ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radio-chico);
+}
+
+.lista-item + .lista-item {
+  border-top: 1px solid var(--borde);
+  border-radius: 0;
+}
+
+/* La que suena: fondo apenas más claro y barrita naranja a la izquierda */
+.lista-item.actual {
+  background: var(--superficie-2);
+  border-left: 3px solid var(--naranja);
+  border-radius: 0;
+}
+
+/* Las que ya sonaron se ven un poco más apagadas */
+.lista-item.pasada {
+  opacity: 0.75;
+}
+
+.lista-item div {
+  min-width: 0;
+}
+
+.lista-item p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lista-item .item-nombre {
+  color: var(--texto);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.lista-item .item-artista {
+  color: var(--texto-2);
+  font-size: 0.82rem;
+}
+
+.lista-item .item-hora {
+  flex-shrink: 0;
+  color: var(--texto-3);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.lista-item.actual .item-hora {
+  color: var(--naranja);
+  font-weight: 600;
+}
+
+.lista-vacia {
+  margin: 0;
+  padding: 4px 0;
+  color: var(--texto-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.lista-nota {
+  margin: 24px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--borde);
+  color: var(--texto-3);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+/* En pantallas chicas ocupa todo el ancho */
+@media (max-width: 900px) {
+  .lista-panel {
+    width: 100%;
+    border-left: none;
+  }
+}
