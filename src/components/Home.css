@@ -1,53 +1,58 @@
-/* Ocupa exactamente la pantalla (menos el header) y deja lugar abajo para el reproductor fijo */
+/* ===== Inicio: una sola pantalla, sin scroll =====
+   El alto exacto lo pone Home.tsx (lo que queda debajo del header). */
 .home {
-  width: min(1280px, calc(100% - 48px));
-  min-height: calc(100vh - 84px);
-  margin: 0 auto;
-  padding: 24px 0 170px;
+  box-sizing: border-box;
+  height: calc(100vh - 100px);
+  overflow: hidden;
+  container-type: size; /* deja usar 100cqh = alto libre del Inicio */
+  padding: 18px 24px 236px; /* abajo deja lugar para el reproductor */
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 16px;
+  text-align: center;
 }
 
 .home-etiqueta {
   margin: 0 0 6px;
-  color: var(--texto-3);
-  font-size: 0.75rem;
+  color: var(--naranja);
+  font-size: 0.8rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .home-titulo {
   margin: 0;
   color: var(--texto);
-  font-size: 2rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 700;
 }
 
-/* ---- Cartel: qué se está escuchando (barrita naranja a la izquierda) ---- */
+/* Cartel que explica qué suena en el Inicio */
 .home-cartel {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  max-width: 720px;
   padding: 12px 18px;
   background: var(--superficie);
+  border: 1px solid var(--borde);
   border-left: 3px solid var(--naranja);
-  border-radius: 0;
-  color: var(--naranja);
+  border-radius: var(--radio-chico);
+  color: var(--texto-2);
+  font-size: 0.9rem;
+  text-align: left;
 }
 
 .home-cartel svg {
   flex-shrink: 0;
+  color: var(--naranja);
 }
 
 .home-cartel p {
   margin: 0;
-  color: var(--texto-2);
-  font-size: 0.95rem;
-  line-height: 1.5;
 }
 
 .home-cartel strong {
@@ -55,84 +60,81 @@
   font-weight: 600;
 }
 
-/* ---- Géneros ---- */
+/* ---- Cuadros de géneros: 10 géneros en 2 filas de 5 ----
+   Se achican solos para que las dos filas entren arriba del reproductor. */
 .generos-grid {
+  flex: 1 1 0;
+  min-height: 0;
+  max-height: 400px;
+  width: min(1000px, 100%, calc((100cqh - 200px) * 2.5 + 56px));
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .genero-card {
   position: relative;
-  aspect-ratio: 1 / 1;
-  background: var(--superficie);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio);
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 10px;
   padding: 12px;
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-/* Al pasar el mouse: se levanta y se marca en naranja */
 .genero-card:hover {
   transform: translateY(-4px);
   border-color: var(--naranja);
-  background: var(--superficie-2);
-  z-index: 5;
 }
 
 .genero-icono {
-  width: 46%;
-  height: 46%;
-  object-fit: contain;
+  height: 50%;
+  max-height: 96px;
+  width: auto;
+  aspect-ratio: 1 / 1;
 }
 
 .genero-nombre {
   color: var(--texto);
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-align: center;
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.2;
 }
 
-/* Globito "¿Te gustaría escuchar...?" que aparece arriba del cuadrado */
+/* Cartelito al pasar el mouse */
 .genero-tip {
   position: absolute;
-  left: 50%;
   bottom: calc(100% + 10px);
-  width: max-content;
-  max-width: 220px;
+  left: 50%;
+  z-index: 5;
+  width: 210px;
   padding: 8px 12px;
-  border-radius: var(--radio-chico);
   background: #f2f2f2;
   color: #1a1a1a;
-  font-size: 0.82rem;
-  line-height: 1.4;
-  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  border-radius: var(--radio-chico);
   box-shadow: var(--sombra-flotante);
-  pointer-events: none;
   opacity: 0;
+  pointer-events: none;
   transform: translate(-50%, 4px);
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
-.genero-tip strong {
-  color: #b9531a;
-}
-
-/* Colita del globito apuntando al cuadrado */
 .genero-tip::after {
   content: '';
   position: absolute;
+  top: 100%;
   left: 50%;
-  bottom: -5px;
-  width: 10px;
-  height: 10px;
-  background: #f2f2f2;
-  transform: translateX(-50%) rotate(45deg);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #f2f2f2;
 }
 
 .genero-card:hover .genero-tip {
@@ -140,31 +142,68 @@
   transform: translate(-50%, 0);
 }
 
-@media (max-width: 700px) {
+/* ---- Notebooks con pantalla baja: el título y el cartel quedan iguales,
+   solo los cuadros pasan a ser rectángulos con el ícono al costado ---- */
+@media (min-width: 761px) and (max-height: 820px) {
+  .generos-grid {
+    width: min(1000px, 100%);
+    max-height: 200px;
+    gap: 10px;
+  }
+
+  .genero-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 6px 12px;
+    text-align: left;
+  }
+
+  .genero-icono {
+    height: 70%;
+    max-height: 56px;
+  }
+
+  .genero-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ---- Celulares: se puede scrollear ---- */
+@media (max-width: 760px) {
   .home {
-    width: calc(100% - 32px);
-    gap: 18px;
-  }
-
-  .home-titulo {
-    font-size: 1.5rem;
-  }
-
-  .home-cartel p {
-    font-size: 0.88rem;
+    height: auto;
+    overflow: visible;
+    container-type: normal;
+    justify-content: flex-start;
+    padding: 20px 16px 240px;
   }
 
   .generos-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    flex: none;
+    max-height: none;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    gap: 10px;
+  }
+
+  .genero-card {
+    aspect-ratio: 1 / 1;
   }
 
   .genero-nombre {
     font-size: 0.85rem;
   }
 
-  /* En el celular no hay mouse: el globito no se usa */
   .genero-tip {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genero-card,
+  .genero-tip {
+    transition: none;
   }
 }

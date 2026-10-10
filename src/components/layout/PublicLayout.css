@@ -19,61 +19,54 @@
   transition: margin-right 0.35s ease;
 }
 
-/* El reproductor también se achica y se corre a la izquierda cuando la lista está abierta */
-.publico .reproductor {
-  left: calc((100% - var(--lista)) / 2);
-  width: min(1280px, calc(100% - var(--lista) - 48px));
-  transition: left 0.35s ease, width 0.35s ease;
-}
-
-/* Ondas de los costados: ocupan solo el margen libre a cada lado del contenido (1280px) */
+/* Ondas de los costados: llenan todo el espacio libre hasta los cuadros de géneros (1000px al centro) */
 .publico-onda {
   position: fixed;
   top: 45%;
   transform: translateY(-50%);
-  width: max(0px, calc((100vw - var(--lista) - 1280px) / 2 - 8px));
-  height: 220px;
+  width: max(0px, calc((100vw - var(--lista) - 1000px) / 2 - 28px));
+  height: 320px;
   display: flex;
   align-items: center;
   gap: 8px;
   overflow: hidden;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.45;
+  opacity: 0.65;
   transition: opacity 0.4s ease, width 0.35s ease, right 0.35s ease;
 }
 
-/* Fuertes en el borde de la pantalla y se desvanecen hacia el contenido */
+/* Se ven fuertes casi hasta el final y se apagan recién cerca de los cuadros */
 .publico-onda--izq {
   left: 0;
-  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent);
-  mask-image: linear-gradient(90deg, #000 40%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, #000 85%, transparent);
 }
 
 .publico-onda--der {
   right: var(--lista);
   flex-direction: row-reverse;
-  -webkit-mask-image: linear-gradient(270deg, #000 40%, transparent);
-  mask-image: linear-gradient(270deg, #000 40%, transparent);
+  -webkit-mask-image: linear-gradient(270deg, #000 85%, transparent);
+  mask-image: linear-gradient(270deg, #000 85%, transparent);
 }
 
 /* Barras gruesas y redondeadas */
 .publico-onda span {
   flex: 1;
   min-width: 6px;
-  max-width: 14px;
+  max-width: 16px;
   background: #e07a3a;
-  border-radius: 7px;
+  border-radius: 8px;
   transition: height 0.12s linear;
 }
 
-/* Mientras suena música las ondas se ven más fuertes */
+/* Mientras suena música las ondas se ven completas */
 .publico--sonando .publico-onda {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 /* Si no queda margen a los costados, se ocultan */
-@media (max-width: 1440px) {
+@media (max-width: 1200px) {
   .publico-onda {
     display: none;
   }
@@ -83,9 +76,5 @@
 @media (max-width: 900px) {
   .publico--lista {
     --lista: 0px;
-  }
-
-  .publico .reproductor {
-    width: calc(100% - 24px);
   }
 }

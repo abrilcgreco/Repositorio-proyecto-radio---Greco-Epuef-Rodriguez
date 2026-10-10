@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { categorias } from '../data/categorias';
 import IconoCategoria from './IconoCategoria';
 import { useReproductor } from '../context/ReproductorContext';
@@ -6,14 +6,39 @@ import './Home.css';
 
 export default function Home() {
   const { setGenero } = useReproductor();
+  const homeRef = useRef<HTMLElement | null>(null);
 
   // En el Inicio suena el mix de todas las canciones. Se empieza con el botón de play del reproductor.
   useEffect(() => {
     setGenero(null);
   }, [setGenero]);
 
+  // El Inicio es una sola pantalla: ocupa justo el alto que queda debajo del header y no se scrollea.
+  useEffect(() => {
+    const home = homeRef.current;
+    if (!home) return;
+    const html = document.documentElement;
+    const overflowAntes = html.style.overflow;
+    window.scrollTo(0, 0);
+
+    function ajustar() {
+      if (!home) return;
+      const esCelular = window.innerWidth <= 760;
+      html.style.overflow = esCelular ? overflowAntes : 'hidden';
+      const arriba = home.getBoundingClientRect().top + window.scrollY;
+      home.style.height = esCelular ? '' : `${window.innerHeight - arriba}px`;
+    }
+
+    ajustar();
+    window.addEventListener('resize', ajustar);
+    return () => {
+      window.removeEventListener('resize', ajustar);
+      html.style.overflow = overflowAntes;
+    };
+  }, []);
+
   return (
-    <main className="home">
+    <main className="home" ref={homeRef}>
       <section className="home-encabezado">
         <p className="home-etiqueta">Radio escolar · E.S.E.T.P. N°724 · Trelew, Chubut</p>
         <h1 className="home-titulo">¡Géneros que tenemos para vos!</h1>
